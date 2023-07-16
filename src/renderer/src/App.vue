@@ -10,5 +10,7 @@ import Layout from './components/Layout.vue'
 
 <style lang="less">
 @import './assets/css/styles.less';
+@import 'primeflex/primeflex.css';
 @import './assets/theme.css';
+@import 'primeicons/primeicons.css';
 </style>

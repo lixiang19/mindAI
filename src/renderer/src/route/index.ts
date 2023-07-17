@@ -11,7 +11,7 @@ const routes = [
     children: [
       { path: '', component: ReadBlock },
       {
-        path: 'search',
+        path: 'web',
         component: WebBlock,
         props: (route): { text: string; type: string } => ({
           text: route.query.text,

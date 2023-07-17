@@ -5,7 +5,7 @@
   ></div> -->
   <Panel
     header="笔记"
-    class="w-15rem h-full"
+    class="w-full h-full"
     :pt="{
       content: { class: 'h-full overflow-auto' },
       toggleableContent: { class: 'contentFull' }
@@ -16,7 +16,6 @@
 
 <script setup lang="ts">
 import Panel from 'primevue/panel'
-import NoteCard from '@renderer/components/NoteCard.vue'
 </script>
 
 <style lang="less">

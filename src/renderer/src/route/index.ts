@@ -1,19 +1,22 @@
 import Read from '../pages/Read.vue'
 import Chat from '../pages/Chat.vue'
 import Note from '../pages/Note.vue'
-import HomeBlock from '../Block/HomeBlock.vue'
-import SearchBlock from '../Block/SearchBlock.vue'
+import ReadBlock from '../Block/ReadBlock.vue'
+import WebBlock from '../Block/WebBlock.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path: '/',
     component: Read,
     children: [
-      { path: '', component: HomeBlock },
+      { path: '', component: ReadBlock },
       {
         path: 'search',
-        component: SearchBlock,
-        props: (route): { text: string } => ({ text: route.query.text })
+        component: WebBlock,
+        props: (route): { text: string; type: string } => ({
+          text: route.query.text,
+          type: route.query.type
+        })
       }
     ]
   },

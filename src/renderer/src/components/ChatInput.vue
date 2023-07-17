@@ -7,14 +7,6 @@
       <div class="divider"></div>
       <i class="pi pi-download cursor-pointer"></i>
       <div class="divider"></div>
-      <Dropdown
-        v-model="selectedType"
-        :options="typeOptions"
-        option-label="name"
-        option-value="code"
-        placeholder="选择回答类型"
-        class="ml-auto"
-      />
     </div>
     <Textarea
       v-model="value"
@@ -28,20 +20,15 @@
 
 <script setup lang="ts">
 import Textarea from 'primevue/textarea'
-import Dropdown from 'primevue/dropdown'
+
 import { ref } from 'vue'
 import modelApi from '../api/modelApi'
-import { useChatStore } from '../store/chatStore'
+import { useChatStore } from '../store/ChatStore'
 const { eraser, test } = useChatStore()
 
 const emit = defineEmits(['submit'])
 const value = ref('')
-const selectedType = ref('current')
-const typeOptions = ref([
-  { name: '从搜索回答', code: 'search' },
-  { name: '从当前页面回答', code: 'current' },
-  { name: '仅通过模型', code: 'model' }
-])
+
 function handleSubmit(): void {
   emit('submit', value.value)
   value.value = ''

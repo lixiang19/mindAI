@@ -1,8 +1,15 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import fs from 'fs'
+import path from 'path'
 
-// Custom APIs for renderer
-const api = {}
+const webviewPreload = 'file://' + path.join(__dirname, '../../resources/webviewPreload.js?asset')
+console.log(webviewPreload)
+const api = {
+  fs,
+  path,
+  webviewPreload
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

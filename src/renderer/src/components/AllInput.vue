@@ -5,7 +5,7 @@
     <InputText
       v-model="value"
       v-tooltip="'支持：搜索、网址、文件'"
-      class="w-30rem"
+      class="w-20rem"
       @keyup.enter="handleSubmit"
     />
   </span>
@@ -29,7 +29,8 @@ function handleSubmit(): void {
       router.push({
         path: '/search',
         query: {
-          text: value.value
+          text: value.value,
+          type: 'search'
         }
       })
       break

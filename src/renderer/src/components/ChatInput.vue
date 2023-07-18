@@ -5,7 +5,6 @@
       <div class="divider"></div>
       <i class="pi pi-eraser mr-2 cursor-pointer" @click="handleEraser"></i>
       <div class="divider"></div>
-      <i class="pi pi-download cursor-pointer"></i>
       <div class="divider"></div>
     </div>
     <Textarea
@@ -13,34 +12,31 @@
       rows="4"
       auto-resize
       class="w-full flex-auto"
-      @keyup.enter="handleSubmit"
+      @keydown.enter="handleSubmit"
     />
   </div>
 </template>
 
 <script setup lang="ts">
 import Textarea from 'primevue/textarea'
-
 import { ref } from 'vue'
 import modelApi from '../api/modelApi'
-import { useChatStore } from '../store/ChatStore'
-const { eraser, test } = useChatStore()
 
-const emit = defineEmits(['submit'])
+const emit = defineEmits(['submit', 'eraser'])
 const value = ref('')
 
-function handleSubmit(): void {
-  emit('submit', value.value)
-  value.value = ''
+function handleSubmit(e): void {
+  if (!e.isComposing) {
+    emit('submit', value.value)
+    value.value = ''
+  }
 }
 function handleStop(): void {
-  // completionApi.abort()
-  test()
+  modelApi.abort()
 }
 function handleEraser(): void {
   modelApi.abort()
-  eraser()
-  console.log('handleEraser')
+  emit('eraser')
 }
 </script>
 

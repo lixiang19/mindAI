@@ -7,7 +7,7 @@
       <div
         v-for="(item, index) in menuList"
         :key="index"
-        :class="['menu_item', route.path === item.path && 'isActive']"
+        :class="['menu_item', route.path.includes(item.path) && 'isActive']"
         @click="router.push(item.path)"
       >
         <img alt="dropdown icon" :src="item.icon" />
@@ -31,21 +31,20 @@ import { useRouter, useRoute } from 'vue-router'
 
 const menuList = ref([
   {
-    path: '/',
+    path: '/chat',
+    icon: chat
+  },
+  {
+    path: '/read',
     icon: yuedu
   },
   {
-    path: '/note',
+    path: '/write',
     icon: note
-  },
-  {
-    path: '/chat',
-    icon: chat
   }
 ])
 const router = useRouter()
 const route = useRoute()
-console.log('🚀 ~ file: Menu.vue:44 ~ route:', route)
 </script>
 
 <style lang="less" scoped>

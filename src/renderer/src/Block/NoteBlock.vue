@@ -1,8 +1,4 @@
 <template>
-  <!-- <div
-    id="NoteBlock"
-    class="relative w-10rem h-full surface-200 flex flex-column align-items-center justify-content-start"
-  ></div> -->
   <Panel
     header="笔记"
     class="w-full h-full"

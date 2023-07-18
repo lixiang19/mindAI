@@ -16,5 +16,9 @@ type CharacterType = {
 interface Message {
   role: string
   content: string
+  shadowContent?: string
 }
 type Messages = Message[]
+type Meta = {
+  type: string
+}

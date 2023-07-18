@@ -1,5 +1,5 @@
 <template>
-  <div class="w-20rem h-full overflow-auto flex flex-column py-2 border-right-1 border-200">
+  <div class="w-15rem h-full overflow-auto flex flex-column border-right-1 border-200">
     <CharacterItem
       v-for="character in characterStore.characters"
       :key="character.id"

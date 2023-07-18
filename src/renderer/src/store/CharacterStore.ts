@@ -1,37 +1,52 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-export const normlCharacter = {
+import { uniq } from 'lodash-es'
+export const webCharacter = {
   name: 'AI小助手',
   id: 0,
-  helloText: '你好，我是AI小助手，有什么可以帮助你的吗？',
-  prompt: '你是一个可靠的AI小助手',
-  icon: 'pi pi-user',
-  desc: '基于OPENAI的gpt3.5模型，直接生成回复',
+  helloText: '我可以根据知识库、以及搜索互联网回答你的问题，也可以阅读网页内容',
+  prompt:
+    "你是一个可靠的AI小助手，我会将我的资料放在{context:''}中，将问题放在{quesiton:''}中，你需要根据我的资料来回答我的问题",
+  icon: 'pi pi-eye',
+  desc: '通过bing搜索以及查找知识库后总结答案',
+  plugins(userContent: string, meta: Meta): string[] {
+    const list: string[] = []
+    // 如果是url，那么就是urlRead
+    if (userContent.startsWith('http')) {
+      list.push('urlRead')
+    }
+    if (meta.type === 'search') {
+      list.push('bingSearch')
+    } else if (meta.type === 'current') {
+      list.push('parsingPage')
+    } else if (meta.type === 'model') {
+      // 如果是问句，那么就是bingSearch
+      if (userContent.startsWith('?') || userContent.startsWith('？')) {
+        list.push('bingSearch')
+      }
+      // 如果是！，就是复用当前上下文，以及解析可能点击的新链接
+      if (userContent.startsWith('!')) {
+        list.push('parsingPage')
+      }
+    }
+
+    return uniq(list)
+  },
   aiConfig: {
-    temperature: 0.7
+    temperature: 0
   }
 }
-const webCharacter = {
-  name: '联网问答',
-  id: 1,
-  helloText: '我可以根据知识库、笔记、以及搜索互联网回答你的问题',
-  preSystemMessage(messages: Messages, context: string): Messages {
+/**
+ *  preSystemMessage(messages: Messages, context: string): Messages {
     // 取出最后一个user的message
     const lastUserMessage = messages[messages.length - 1]
     lastUserMessage.content = `我的问题是：{question:${lastUserMessage.content}},我的资料是：{context:${context}}`
     return messages
   },
-  prompt:
-    "你是一个可靠的AI小助手，我会将我的资料放在{context:''}中，将问题放在{quesiton:''}中，你需要根据我的资料来回答我的问题",
-  icon: 'pi pi-eye',
-  desc: '通过bing搜索以及查找知识库后总结答案',
-  aiConfig: {
-    temperature: 0
-  }
-}
+ */
 // 预定义的两个角色，普通问答，联网问答+知识库问答
 export const useCharacterStore = defineStore('Character', () => {
-  const characters = ref<CharacterType[]>([normlCharacter, webCharacter])
+  const characters = ref<CharacterType[]>([webCharacter])
   function addCharacter(character: CharacterType): void {
     characters.value.push(character)
   }

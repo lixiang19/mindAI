@@ -34,7 +34,7 @@ import modelApi from '../api/modelApi'
 import Dropdown from 'primevue/dropdown'
 const emit = defineEmits(['submit', 'eraser', 'typeChange'])
 const value = ref('')
-const selectedType = ref('model')
+const selectedType = ref('search')
 const typeOptions = ref([
   { name: '智能', code: 'model' },
   { name: '互联网及知识库', code: 'search' },

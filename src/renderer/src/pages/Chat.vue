@@ -4,7 +4,7 @@
       <!-- <SplitterPanel class="flex align-items-center justify-content-center" :size="10">
         <NoteBlock></NoteBlock>
       </SplitterPanel> -->
-      <SplitterPanel class="flex align-items-center justify-content-center" :size="80">
+      <SplitterPanel class="flex align-items-center justify-content-center" :size="50">
         <div class="flex flex-column justify-content-start h-full">
           <div class="flex h-4rem w-full px-2 align-items-center gap-3">
             <Button
@@ -20,9 +20,15 @@
         </div>
         <ChatBlock :character="activeCharacter"></ChatBlock>
       </SplitterPanel>
-      <!-- <SplitterPanel class="flex align-items-center justify-content-center" :size="50">
-        操作区，操作区在搜索的时候分为搜索引擎、搜索排名第一的结果、知识库、自定义搜索引擎
-      </SplitterPanel> -->
+      <SplitterPanel
+        v-if="operationAreaStore.isShowOperationArea"
+        :size="50"
+        :style="{
+          flexBasis: '50%'
+        }"
+      >
+        <OperationBlock></OperationBlock>
+      </SplitterPanel>
     </Splitter>
   </div>
 </template>
@@ -31,14 +37,33 @@
 import CharacterList from '@renderer/Block/CharacterList.vue'
 import ChatBlock from '@renderer/Block/ChatBlock.vue'
 import NoteBlock from '@renderer/Block/NoteBlock.vue'
+import OperationBlock from '@renderer/Block/OperationBlock.vue'
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
 import { useCharacterStore, webCharacter } from '@renderer/store/CharacterStore'
 import Button from 'primevue/button'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watchEffect } from 'vue'
+import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 const characterStore = useCharacterStore()
+const operationAreaStore = useOperationAreaStore()
 const activeCharacterId = ref(0)
 const activeCharacter = ref<CharacterType>(webCharacter)
+const splitterSize = reactive({
+  note: 0,
+  chat: 100,
+  operation: 0
+})
+watchEffect(() => {
+  console.log(operationAreaStore.isShowOperationArea)
+  if (operationAreaStore.isShowOperationArea) {
+    splitterSize.chat = 50
+    splitterSize.operation = 50
+  } else {
+    splitterSize.chat = 100
+    splitterSize.operation = 0
+  }
+  console.log(splitterSize)
+})
 function handleActiveCharacter(id: number): void {
   activeCharacterId.value = id
   const info = characterStore.getCharacterById(id)

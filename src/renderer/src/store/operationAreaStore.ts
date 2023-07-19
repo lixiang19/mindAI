@@ -1,20 +1,30 @@
 import { defineStore } from 'pinia'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref, VNodeRef } from 'vue'
+const id = 0
+
+interface Operation {
+  url: string
+  executeCode?: string
+  id: number
+}
 
 export const useOperationAreaStore = defineStore('OperationArea', () => {
-  const isShowOperationArea = ref(false)
-  const operationList: unknown[] = reactive([]) // 有可能是个webview、read
-  function addWebview(url: string, executeCode?: string): unknown {
+  const isShowOperationArea = computed(() => {
+    return operationList.length > 0
+  })
+
+  const operationList = reactive<Array<Operation>>([]) // 有可能是个webview、read
+  function addWebview(url: string, executeCode?: string): number {
     // 返回webview配置
-    const webviewComRef = ref<HTMLElement | null>()
-    const webview = {
+    const webview = reactive<Operation>({
       url,
       executeCode,
-      webviewComRef
-    }
+      id: id
+    })
     operationList.push(webview)
-    return webviewComRef
+    return id
   }
+
   return {
     isShowOperationArea,
     operationList,

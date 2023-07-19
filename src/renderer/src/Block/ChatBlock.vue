@@ -35,7 +35,7 @@ function handleTypeChange(type: string): void {
   meta.value.type = type
 }
 const meta = ref({
-  type: 'current'
+  type: 'search'
 })
 // 去除system的消息
 const messagesWithoutSystem = computed(() => {

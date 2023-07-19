@@ -1,12 +1,20 @@
 <template>
-  <webview ref="webRef" disablewebsecurity :src="src" class="w-full h-full"></webview>
+  <webview
+    :id="'webview' + id"
+    ref="webRef"
+    disablewebsecurity
+    :src="webSrc"
+    class="w-full h-full"
+  ></webview>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 const props = defineProps<{
   src: string
-  executeCode: string
+  id: number
+  executeCode?: string
 }>()
+const webSrc = ref('')
 const webRef = ref<HTMLElement | null>(null)
 defineExpose({
   getWebview: () => {
@@ -28,5 +36,6 @@ onMounted(() => {
     emit('domReady', webRef.value)
     props.executeCode && webview.executeJavaScript(props.executeCode)
   })
+  webSrc.value = props.src
 })
 </script>

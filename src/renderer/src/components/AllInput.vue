@@ -21,7 +21,7 @@ const value = ref('')
 
 function handleSubmit(): void {
   const type = getInputType(value.value)
-  console.log(type)
+
   switch (type) {
     case 'url':
       router.push({

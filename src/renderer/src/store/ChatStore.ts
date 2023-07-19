@@ -1,34 +1,34 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import modelApi from '../api/modelApi'
 import { saveEmbeddings, searchEmbeddings } from '../api/embedding'
 import { last } from 'lodash-es'
 import pluginMap from '../plugins'
 export const useChatStore = defineStore('Chat', () => {
-  const characterMessages = ref({})
-  const characterInfoMap = ref({})
-  const characterContext = ref({})
+  const characterMessages = reactive({})
+  const characterInfoMap = reactive({})
+  const characterContext = reactive({})
   function initCharacterMessages(id: number, character: CharacterType): void {
-    if (!characterMessages.value[id] || characterMessages.value[id].length === 0) {
-      characterMessages.value[id] = [
+    if (!characterMessages[id] || characterMessages[id].length === 0) {
+      characterMessages[id] = [
         { role: 'system', content: character.prompt },
         { role: 'assistant', content: character.helloText }
       ]
-      characterInfoMap.value[id] = character
+      characterInfoMap[id] = character
     }
   }
   // 这个会不断添加重复的上下文，不能这样
   function addUserMessage(id: number, text: string, context?: string): void {
     if (context) {
-      characterContext.value[id] = context
+      characterContext[id] = context
     }
-    characterMessages.value[id].push({ role: 'user', content: text })
+    characterMessages[id].push({ role: 'user', content: text })
   }
   async function addSystemMessage(id: number, meta?: unknown): Promise<void> {
     // 这里逻辑越来越重，需要修改
-    const messages = JSON.parse(JSON.stringify(characterMessages.value[id]))
+    const messages = JSON.parse(JSON.stringify(characterMessages[id]))
 
-    const characterInfo = characterInfoMap.value[id]
+    const characterInfo = characterInfoMap[id]
     // 1. 调用插件,先判断plugins是不是函数
     const plugins =
       typeof characterInfo.plugins === 'function'
@@ -50,12 +50,12 @@ export const useChatStore = defineStore('Chat', () => {
       content: '正在思考中...'
     }
 
-    characterMessages.value[id].push(assistantMessage)
+    characterMessages[id].push(assistantMessage)
     console.log('🚀 ~ file: ChatStore.ts:30 ~ addSystemMessage ~ messages:', messages)
 
     console.log(
       '🚀 ~ file: ChatStore.ts:52 ~ addSystemMessage ~ characterMessages.value[id]:',
-      characterMessages.value[id]
+      characterMessages[id]
     )
 
     // const ret = await modelApi.completion({
@@ -63,13 +63,13 @@ export const useChatStore = defineStore('Chat', () => {
     //   messages: messages,
     //   stream: true,
     //   onMessage: (string) => {
-    //     last(characterMessages.value[id]).content = string
+    //     last(characterMessages[id]).content = string
     //   }
     // })
   }
   // 初始化
   function eraser(id: number, character: CharacterType): void {
-    characterMessages.value[id] = []
+    characterMessages[id] = []
     initCharacterMessages(id, character)
   }
   return { characterMessages, addUserMessage, addSystemMessage, initCharacterMessages, eraser }

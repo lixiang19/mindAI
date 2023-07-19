@@ -35,7 +35,7 @@ import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
 import { useCharacterStore, webCharacter } from '@renderer/store/CharacterStore'
 import Button from 'primevue/button'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 const characterStore = useCharacterStore()
 const activeCharacterId = ref(0)
 const activeCharacter = ref<CharacterType>(webCharacter)

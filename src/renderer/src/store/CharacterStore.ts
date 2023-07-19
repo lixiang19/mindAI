@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { uniq } from 'lodash-es'
 export const webCharacter = {
   name: 'AI小助手',
@@ -46,13 +46,13 @@ export const webCharacter = {
  */
 // 预定义的两个角色，普通问答，联网问答+知识库问答
 export const useCharacterStore = defineStore('Character', () => {
-  const characters = ref<CharacterType[]>([webCharacter])
+  const characters = reactive<CharacterType[]>([webCharacter])
   function addCharacter(character: CharacterType): void {
-    characters.value.push(character)
+    characters.push(character)
   }
 
   function getCharacterById(id: number): CharacterType | undefined {
-    return characters.value.find((character) => character.id === id)
+    return characters.find((character) => character.id === id)
   }
 
   return { characters, addCharacter, getCharacterById }

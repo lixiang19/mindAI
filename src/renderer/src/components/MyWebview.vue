@@ -1,5 +1,5 @@
 <template>
-  <webview ref="webV" disablewebsecurity :src="src" class="w-full h-full"></webview>
+  <webview ref="webRef" disablewebsecurity :src="src" class="w-full h-full"></webview>
 </template>
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
@@ -8,6 +8,11 @@ const props = defineProps<{
   executeCode: string
 }>()
 const webRef = ref<HTMLElement | null>(null)
+defineExpose({
+  getWebview: () => {
+    return webRef.value as Electron.WebviewTag
+  }
+})
 const emit = defineEmits(['domReady', 'webViewMessage'])
 onMounted(() => {
   const webview = webRef.value as Electron.WebviewTag
@@ -20,7 +25,7 @@ onMounted(() => {
     emit('webViewMessage', event)
   })
   webview.addEventListener('dom-ready', () => {
-    emit('domReady')
+    emit('domReady', webRef.value)
     props.executeCode && webview.executeJavaScript(props.executeCode)
   })
 })

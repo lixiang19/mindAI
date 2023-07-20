@@ -17,7 +17,8 @@ export class BingSearch implements IPlugin {
   // }
   async preUserMessage(message: Message): Promise<Message> {
     const executeBing = new ExecuteBing()
-    await executeBing.createSearchWebview(message.content)
-    await executeBing.getSearchResult()
+    await executeBing.fetchBingSearchResult(message.content)
+    // await executeBing.createSearchWebview(message.content)
+    // await executeBing.getSearchResult()
   }
 }

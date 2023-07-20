@@ -48,22 +48,7 @@ const characterStore = useCharacterStore()
 const operationAreaStore = useOperationAreaStore()
 const activeCharacterId = ref(0)
 const activeCharacter = ref<CharacterType>(webCharacter)
-const splitterSize = reactive({
-  note: 0,
-  chat: 100,
-  operation: 0
-})
-watchEffect(() => {
-  console.log(operationAreaStore.isShowOperationArea)
-  if (operationAreaStore.isShowOperationArea) {
-    splitterSize.chat = 50
-    splitterSize.operation = 50
-  } else {
-    splitterSize.chat = 100
-    splitterSize.operation = 0
-  }
-  console.log(splitterSize)
-})
+
 function handleActiveCharacter(id: number): void {
   activeCharacterId.value = id
   const info = characterStore.getCharacterById(id)

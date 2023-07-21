@@ -44,28 +44,28 @@ export const useChatStore = defineStore('Chat', () => {
       }
     }
     // 删除最后一个user的message.shadowContent
-    // delete messages[messages.length - 1].shadowContent
-    // const assistantMessage = {
-    //   role: 'assistant',
-    //   content: '正在思考中...'
-    // }
+    delete messages[messages.length - 1].shadowContent
+    const assistantMessage = {
+      role: 'assistant',
+      content: '正在思考中...'
+    }
 
-    // characterMessages[id].push(assistantMessage)
-    // console.log('🚀 ~ file: ChatStore.ts:30 ~ addSystemMessage ~ messages:', messages)
+    characterMessages[id].push(assistantMessage)
+    console.log('🚀 ~ file: ChatStore.ts:30 ~ addSystemMessage ~ messages:', messages)
 
-    // console.log(
-    //   '🚀 ~ file: ChatStore.ts:52 ~ addSystemMessage ~ characterMessages.value[id]:',
-    //   characterMessages[id]
-    // )
+    console.log(
+      '🚀 ~ file: ChatStore.ts:52 ~ addSystemMessage ~ characterMessages.value[id]:',
+      characterMessages[id]
+    )
 
-    // const ret = await modelApi.completion({
-    //   model: 'gpt-3.5-turbo-0613',
-    //   messages: messages,
-    //   stream: true,
-    //   onMessage: (string) => {
-    //     last(characterMessages[id]).content = string
-    //   }
-    // })
+    const ret = await modelApi.completion({
+      model: 'gpt-3.5-turbo-0613',
+      messages: messages,
+      stream: true,
+      onMessage: (string) => {
+        last(characterMessages[id]).content = string
+      }
+    })
   }
   // 初始化
   function eraser(id: number, character: CharacterType): void {

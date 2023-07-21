@@ -7,3 +7,12 @@ interface IPlugin {
   functions?: []
   // 函数调用等待补全
 }
+interface IPluginConfig {
+  showOption?: boolean
+}
+
+interface searchResult {
+  link: string | null | undefined
+  caption: string | null | undefined
+  title: string | null | undefined
+}

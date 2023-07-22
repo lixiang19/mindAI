@@ -1,4 +1,4 @@
-import Api2d from 'api2d'
+import Api2d from './Api2d'
 
 const timeout = 1000 * 60 // 60 seconds timeout
 const key = 'fk205491-0Y3cmoNsKfXvlXiIiUak0wnkRiZWR90a'

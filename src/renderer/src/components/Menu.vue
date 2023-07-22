@@ -35,7 +35,7 @@ const menuList = ref([
     icon: chat
   },
   {
-    path: '/read',
+    path: '/demo',
     icon: yuedu
   },
   {

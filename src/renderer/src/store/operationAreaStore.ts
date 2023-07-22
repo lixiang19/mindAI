@@ -6,6 +6,7 @@ interface Operation {
   url: string
   executeCode?: string
   id: number
+  type: 'webview' | 'read'
 }
 
 export const useOperationAreaStore = defineStore('OperationArea', () => {
@@ -19,7 +20,8 @@ export const useOperationAreaStore = defineStore('OperationArea', () => {
     const webview = reactive<Operation>({
       url,
       executeCode,
-      id: id
+      id: id,
+      type: 'webview'
     })
     operationList.push(webview)
     return id

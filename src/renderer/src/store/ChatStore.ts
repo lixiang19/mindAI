@@ -25,8 +25,16 @@ export const useChatStore = defineStore('Chat', () => {
     characterMessages[id].push({ role: 'user', content: text })
   }
   async function addSystemMessage(id: number, meta?: unknown): Promise<void> {
-    // 这里逻辑越来越重，需要修改
     const messages = JSON.parse(JSON.stringify(characterMessages[id]))
+
+    const assistantMessage = {
+      role: 'assistant',
+      content: '正在思考中...'
+    }
+
+    characterMessages[id].push(assistantMessage)
+    const functions: OpenAiFunction[] = []
+    // 这里逻辑越来越重，需要修改
 
     const characterInfo = characterInfoMap[id]
     // 1. 调用插件,先判断plugins是不是函数
@@ -35,6 +43,7 @@ export const useChatStore = defineStore('Chat', () => {
         ? characterInfo.plugins(messages[messages.length - 1].content, meta)
         : characterInfo.plugins
     for (const pluginName of plugins) {
+      console.log('🚀 ~ file: ChatStore.ts:39 ~ addSystemMessage ~ pluginName:', pluginName)
       const plugin = pluginMap[pluginName]
       const pluginInstance = new plugin()
       if (pluginInstance.preUserMessage) {
@@ -42,30 +51,30 @@ export const useChatStore = defineStore('Chat', () => {
           messages[messages.length - 1]
         )
       }
+
+      if (pluginInstance.functions) {
+        functions.push(...pluginInstance.functions)
+      }
+      // 把函数调用添加进去
     }
+
     // 删除最后一个user的message.shadowContent
     delete messages[messages.length - 1].shadowContent
-    const assistantMessage = {
-      role: 'assistant',
-      content: '正在思考中...'
-    }
 
-    characterMessages[id].push(assistantMessage)
     console.log('🚀 ~ file: ChatStore.ts:30 ~ addSystemMessage ~ messages:', messages)
 
-    console.log(
-      '🚀 ~ file: ChatStore.ts:52 ~ addSystemMessage ~ characterMessages.value[id]:',
-      characterMessages[id]
-    )
-
-    const ret = await modelApi.completion({
-      model: 'gpt-3.5-turbo-0613',
-      messages: messages,
-      stream: true,
-      onMessage: (string) => {
-        last(characterMessages[id]).content = string
-      }
-    })
+    try {
+      const ret = await modelApi.completion({
+        model: 'gpt-3.5-turbo-16k-0613',
+        messages: messages,
+        stream: true,
+        onMessage: (string) => {
+          last(characterMessages[id]).content = string
+        }
+      })
+    } catch (error) {
+      console.log('🚀 ~ file: ChatStore.ts:63 ~ addSystemMessage ~ error', error)
+    }
   }
   // 初始化
   function eraser(id: number, character: CharacterType): void {

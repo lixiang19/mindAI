@@ -4,6 +4,7 @@ export class ExecuteBing {
   webViewDocument!: Document
 
   async createSearchWebview(search: string) {
+    console.log('🚀 ~ file: executeBing.ts:7 ~ ExecuteBing ~ createSearchWebview ~ search:', search)
     this.executeWebview = new ExecuteWebview()
     await this.executeWebview.createWebview(
       'https://www.bing.com/search?q=' + encodeURIComponent(search) + '&FORM=BEHPTB&cc=sg'

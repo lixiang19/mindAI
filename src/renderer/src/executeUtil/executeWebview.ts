@@ -30,18 +30,4 @@ export class ExecuteWebview {
     tempDoc.body.innerHTML = res
     console.log(tempDoc)
   }
-  getMarkdown(html: string, baseUrl: string): string {
-    // const tempDoc = document.implementation.createHTMLDocument()
-    // const base = tempDoc.createElement('base')
-    // base.href = baseUrl
-    // tempDoc.head.append(base)
-    // tempDoc.body.innerHTML = html
-    // const reader = new Readability(tempDoc)
-    // const parsed = reader.parse()
-    // if (parsed) {
-    //   return turndown.turndown(parsed.content)
-    // }
-    // return ''
-  }
-  findParas(text: string) {}
 }

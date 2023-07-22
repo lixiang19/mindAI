@@ -1,11 +1,25 @@
 interface IPlugin {
-  name: string
+  pluginName: string
+  functions?: OpenAiFunction[]
   preUserMessage?: (message: Message) => message
   afterUserMessage?: (messages: Messages, context: string) => Messages
   preSystemMessage?: (messages: Messages, context: string) => Messages
   afterSystemMessage?: (messages: Messages, context: string) => Messages
-  functions?: []
-  // 函数调用等待补全
+}
+
+interface OpenAiFunction {
+  name: string
+  description: string
+  parameters: {
+    type: 'object'
+    properties: {
+      [key: string]: {
+        type: string
+        description: string
+      }
+    }
+    required: sting[]
+  }
 }
 interface IPluginConfig {
   showOption?: boolean

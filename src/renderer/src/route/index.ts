@@ -4,10 +4,15 @@ import Write from '../pages/Write.vue'
 import ReadBlock from '../Block/ReadBlock.vue'
 import WebBlock from '../Block/WebBlock.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import Demo from '../pages/Demo.vue'
 const routes = [
   {
     path: '/',
-    redirect: '/chat'
+    redirect: '/demo'
+  },
+  {
+    path: '/demo',
+    component: Demo
   },
   {
     path: '/read',

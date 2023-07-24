@@ -40,14 +40,15 @@ import NoteBlock from '@renderer/Block/NoteBlock.vue'
 import OperationBlock from '@renderer/Block/OperationBlock.vue'
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
-import { useCharacterStore, webCharacter } from '@renderer/store/CharacterStore'
+import { useCharacterStore } from '@renderer/store/CharacterStore'
 import Button from 'primevue/button'
+import baseAI from '@renderer/characters/baseAI'
 import { reactive, ref, watchEffect } from 'vue'
 import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 const characterStore = useCharacterStore()
 const operationAreaStore = useOperationAreaStore()
 const activeCharacterId = ref(0)
-const activeCharacter = ref<CharacterType>(webCharacter)
+const activeCharacter = ref<CharacterType>(baseAI)
 
 function handleActiveCharacter(id: number): void {
   activeCharacterId.value = id

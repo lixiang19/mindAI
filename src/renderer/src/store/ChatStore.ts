@@ -29,10 +29,17 @@ export const useChatStore = defineStore('Chat', () => {
 
     const assistantMessage = {
       role: 'assistant',
-      content: '正在思考中...'
+      content: '思考中。。。'
     }
 
     characterMessages[id].push(assistantMessage)
+    // let i = 0
+    // setInterval(() => {
+    //   if (i <= 15) {
+    //     characterMessages[id].push(assistantMessage)
+    //   }
+    //   i++
+    // }, 100)
     const functions: OpenAiFunction[] = []
     // 这里逻辑越来越重，需要修改
 
@@ -63,18 +70,22 @@ export const useChatStore = defineStore('Chat', () => {
 
     console.log('🚀 ~ file: ChatStore.ts:30 ~ addSystemMessage ~ messages:', messages)
 
-    try {
-      const ret = await modelApi.completion({
-        model: 'gpt-3.5-turbo-16k-0613',
-        messages: messages,
-        stream: true,
-        onMessage: (string) => {
-          last(characterMessages[id]).content = string
-        }
-      })
-    } catch (error) {
-      console.log('🚀 ~ file: ChatStore.ts:63 ~ addSystemMessage ~ error', error)
-    }
+    // try {
+    //   const ret = await modelApi.completion({
+    //     model: 'gpt-3.5-turbo-16k-0613',
+    //     messages: messages,
+    //     stream: true,
+    //     onMessage: (string) => {
+    //       last(characterMessages[id]).content = string
+    //       console.log(
+    //         '🚀 ~ file: ChatStore.ts:74 ~ addSystemMessage ~  last(characterMessages[id]).content:',
+    //         last(characterMessages[id]).content
+    //       )
+    //     }
+    //   })
+    // } catch (error) {
+    //   console.log('🚀 ~ file: ChatStore.ts:63 ~ addSystemMessage ~ error', error)
+    // }
   }
   // 初始化
   function eraser(id: number, character: CharacterType): void {

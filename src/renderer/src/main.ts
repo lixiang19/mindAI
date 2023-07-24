@@ -13,6 +13,7 @@ app.use(router)
 app.use(PrimeVue, { ripple: true, inputStyle: 'filled' })
 app.mount('#app')
 app.directive('tooltip', Tooltip)
+
 // 设置font-size
 // const setHtmlFontSize = () => {
 //   const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth

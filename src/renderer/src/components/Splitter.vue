@@ -72,8 +72,6 @@ const zoomOutPanels = computed(() => {
 })
 
 function handleFullIconClick(state) {
-  console.log('🚀 ~ file: Splitter.vue:70 ~ handleFullIconClick ~ state:', state)
-  console.log('🚀 ~ file: Splitter.vue:72 ~ handleFullIconClick ~ panelState:', panelState)
   panelState.value[state.id].isFull = !panelState.value[state.id].isFull
 }
 function handleZoomIconClick(state) {

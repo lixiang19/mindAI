@@ -1,7 +1,7 @@
 <template>
   <div class="w-15rem h-full overflow-auto flex flex-column border-right-1 border-200">
     <CharacterItem
-      v-for="character in characterStore.characters"
+      v-for="character in characters"
       :key="character.id"
       :character="character"
       :is-actived="character.id === activeCharacterId"
@@ -11,10 +11,14 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import CharacterItem from '@renderer/components/CharacterItem.vue'
-import { useCharacterStore } from '@renderer/store/CharacterStore'
-const characterStore = useCharacterStore()
+import { getCharacterList } from '@renderer/backend/character'
+const characters = reactive<CharacterType[]>([])
+onMounted(async () => {
+  const list = await getCharacterList()
+  characters.push(...list)
+})
 const activeCharacterId = ref(0)
 const emit = defineEmits(['active-character'])
 const setActiveCharacterId = (id: number): void => {

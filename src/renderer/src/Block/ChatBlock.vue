@@ -11,47 +11,43 @@
         ></Dialogue>
       </div>
     </div>
-
-    <ChatInput
-      class="w-full h-20rem"
-      @submit="handleSubmit"
-      @eraser="handleEraser"
-      @typeChange="handleTypeChange"
-    ></ChatInput>
+    <ChatInput class="w-full h-20rem" @submit="handleSubmit" @eraser="handleEraser"></ChatInput>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onUpdated, watch, watchEffect } from 'vue'
+import { computed, onUpdated, reactive, watch } from 'vue'
 import Dialogue from '../components/Dialogue.vue'
 import ChatInput from '../components/ChatInput.vue'
-import { useChatStore } from '../store/ChatStore'
 import { ref } from 'vue'
-
+import { last } from 'lodash-es'
+import {
+  initCharacterMessages,
+  addUserMessage,
+  addSystemWaitMessage,
+  addSystemMessage
+} from '@renderer/backend/chat'
 const props = defineProps<{
   character: CharacterType
 }>()
-const chatStore = useChatStore()
-watchEffect(() => {
-  chatStore.initCharacterMessages(props.character.id, props.character)
-})
-function handleTypeChange(type: string): void {
-  meta.value.type = type
-}
-const dialogueBox = ref<HTMLElement | null>(null)
-const meta = ref({
-  type: 'search'
-})
-// 去除system的消息
-const messagesWithoutSystem = computed(() => {
-  if (chatStore.characterMessages[props.character.id]) {
-    return chatStore.characterMessages[props.character.id].filter(
-      (message) => message.role !== 'system'
-    )
-  } else {
-    return []
+watch(
+  () => props.character,
+  async (character) => {
+    const newMessages = await initCharacterMessages(character.id, character)
+    messages.value = newMessages
+  },
+  {
+    immediate: true
   }
+)
+
+const dialogueBox = ref<HTMLElement | null>(null)
+
+const messages = ref<Messages>([])
+const messagesWithoutSystem = computed(() => {
+  return messages.value.filter((message) => message.role !== 'system')
 })
+
 onUpdated(() => {
   if (dialogueBox.value) {
     dialogueBox.value!.scrollIntoView({
@@ -60,24 +56,18 @@ onUpdated(() => {
     })
   }
 })
-// watch(
-//   () => messagesWithoutSystem.value,
-//   () => {
-//     setTimeout(() => {
-//       dialogueBox.value!.scrollIntoView({
-//         behavior: 'smooth',
-//         block: 'end'
-//       })
-//     }, 100)
-//   }
-// )
 
-function handleEraser(): void {
-  chatStore.eraser(props.character.id, props.character)
+async function handleEraser() {
+  const newMessages = await initCharacterMessages(props.character.id, props.character)
+  messages.value = newMessages
 }
-function handleSubmit(content: string): void {
-  chatStore.addUserMessage(props.character.id, content)
-  chatStore.addSystemMessage(props.character.id, meta.value)
+async function handleSubmit(content: string) {
+  let newMessages = addUserMessage(props.character.id, content)
+  newMessages = addSystemWaitMessage(props.character.id)
+  messages.value = newMessages
+  addSystemMessage(props.character.id, (str) => {
+    last(messages.value)!.content = str
+  })
 }
 </script>
 

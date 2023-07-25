@@ -5,8 +5,12 @@ type CharacterType = {
   desc: string
   helloText: string
   prompt: string
+  isSelect: boolean
+  possibleKeywords?: string[]
+  backgroundColor?: string
   preSystemMessage?: (messages: Messages, context: string) => Messages
   aiConfig: {
+    context_length?: number // 上下文数量
     max_tokens?: number // 生成的最大长度
     temperature?: number // 生成的多样性
     frequency_penalty?: number // 重复度惩罚因子

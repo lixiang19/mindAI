@@ -6,15 +6,8 @@
       <i class="pi pi-eraser mr-2 cursor-pointer" @click="handleEraser"></i>
       <div class="divider"></div>
       <div class="divider"></div>
-      <!-- <div class="ml-auto">AI响应方式：</div>
-      <Dropdown
-        v-model="selectedType"
-        :options="typeOptions"
-        option-label="name"
-        option-value="code"
-        placeholder="选择AI回答方式"
-        @change="handleTypeChange"
-      /> -->
+      <div class="ml-auto">展示思考链：</div>
+      <InputSwitch v-model="operationAreaStore.allowShowChain" />
     </div>
     <Textarea
       v-model="value"
@@ -31,18 +24,12 @@
 import Textarea from 'primevue/textarea'
 import { ref } from 'vue'
 import modelApi from '../api/modelApi'
-// import Dropdown from 'primevue/dropdown'
+import InputSwitch from 'primevue/inputswitch'
+import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
+const operationAreaStore = useOperationAreaStore()
 const emit = defineEmits(['submit', 'eraser', 'typeChange'])
 const value = ref('')
-// const selectedType = ref('search')
-// const typeOptions = ref([
-//   { name: '智能', code: 'model' },
-//   { name: '互联网及知识库', code: 'search' },
-//   { name: '当前页面', code: 'current' }
-// ])
-// function handleTypeChange(e): void {
-//   emit('typeChange', selectedType.value)
-// }
+
 function handleSubmit(e): void {
   e.preventDefault()
   if (!e.isComposing) {

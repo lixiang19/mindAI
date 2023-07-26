@@ -8,7 +8,7 @@
         <NoteBlock></NoteBlock>
       </SplitterPanel>
       <SplitterPanel class="flex align-items-center justify-content-center" :size="25">
-        <ChartBlock></ChartBlock>
+        <!-- <ChartBlock></ChartBlock> -->
       </SplitterPanel>
     </Splitter>
   </div>

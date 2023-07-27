@@ -1,17 +1,5 @@
 <template>
   <div id="Note" class="h-full w-full surface-ground py-5 px-5 flex gap-3 justify-content-between">
-    <!-- <Card
-      :pt="{
-        body: { class: 'h-full' },
-        content: { class: 'contentFull' }
-      }"
-      class="col-2 h-full"
-    >
-      <template #title>参考上下文 </template>
-      <template #content>
-
-      </template>
-    </Card> -->
     <Card
       :pt="{
         body: { class: 'h-full' },

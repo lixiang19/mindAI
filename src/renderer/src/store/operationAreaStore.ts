@@ -14,10 +14,24 @@ export const useOperationAreaStore = defineStore('OperationArea', () => {
       url,
       executeCode,
       id: id,
+      title: 'webview',
       type: 'webview'
     })
     operationList.push(webview)
     id++
+    return id
+  }
+  function addSearchPreview(searchResult, resultMarkDown): number {
+    const searchPreview = reactive<Operation>({
+      params: {
+        searchResult,
+        resultMarkDown
+      },
+      id: id,
+      title: '搜索结果',
+      type: 'searchPreview'
+    })
+    operationList.push(searchPreview)
     return id
   }
   function clearOperation() {
@@ -27,6 +41,7 @@ export const useOperationAreaStore = defineStore('OperationArea', () => {
     isShowOperationArea,
     operationList,
     addWebview,
+    addSearchPreview,
     clearOperation,
     allowShowChain
   }

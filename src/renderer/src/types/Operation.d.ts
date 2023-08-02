@@ -1,6 +1,10 @@
 interface Operation {
-  url: string
+  url?: string
   executeCode?: string
   id: number
-  type: 'webview' | 'read'
+  title: string
+  type: 'webview' | 'read' | 'searchPreview'
+  params?: {
+    [key: string]: unknown
+  }
 }

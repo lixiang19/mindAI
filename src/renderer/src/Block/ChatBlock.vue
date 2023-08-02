@@ -1,6 +1,6 @@
 <template>
   <div id="ChatBlock" class="w-full h-full flex flex-column justify-content-between">
-    <div class="w-full overflow-auto px-2 pb-3 dialogueWrapper">
+    <div class="w-full overflow-auto px-2 py-3 dialogueWrapper">
       <div ref="dialogueBox" class="w-full flex flex-column">
         <Dialogue
           v-for="(message, index) in messagesWithoutSystem"
@@ -11,7 +11,7 @@
         ></Dialogue>
       </div>
     </div>
-    <ChatInput class="w-full h-20rem" @submit="handleSubmit" @eraser="handleEraser"></ChatInput>
+    <ChatInput class="w-full h-15rem" @submit="handleSubmit" @eraser="handleEraser"></ChatInput>
   </div>
 </template>
 

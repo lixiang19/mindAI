@@ -1,15 +1,14 @@
 <template>
-  <div id="RadioGroup">
-    <div v-for="(item, i) in options" :key="i" class="flex align-items-center">
-      <RadioButton v-model="value" :value="item.value" />
-      <label class="ml-2">{{ item.name }}</label>
-    </div>
-  </div>
+  <t-radio-group v-model="value">
+    <t-radio-button v-for="(item, i) in options" :key="i" :value="item.value">{{
+      item.name
+    }}</t-radio-button>
+  </t-radio-group>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import RadioButton from 'primevue/radiobutton'
+
 const props = defineProps<{
   modelValue: string
   options: { name: string; value: string }[]
@@ -22,6 +21,10 @@ const value = computed({
 </script>
 
 <style lang="less" scoped>
-#RadioGroup {
+:deep(.t-radio-button) {
+  border: 1px solid var(--td-border-level-2-color) !important;
+}
+:deep(.t-radio-button.t-is-checked) {
+  border: 1px solid var(--td-brand-color) !important;
 }
 </style>

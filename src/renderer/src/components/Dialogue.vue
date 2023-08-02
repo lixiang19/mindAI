@@ -1,11 +1,7 @@
 <template>
   <div
     id="Dialogue"
-    :class="[
-      'flex',
-      'mb-3',
-      direction === 'right' && 'flex-row-reverse justify-content-end ml-auto'
-    ]"
+    :class="['flex mb-3', direction === 'right' && 'flex-row-reverse justify-content-end ml-auto']"
   >
     <Avatar
       :icon="icon"
@@ -24,7 +20,7 @@
       ></div> -->
       <v-md-preview
         :text="content"
-        class="surface-card hover:shadow-2 cursor-pointer border-round text-sm"
+        class="surface-card cursor-pointer border-round text-sm"
       ></v-md-preview>
     </div>
   </div>
@@ -68,11 +64,8 @@ const icon = computed(() => {
 
 <style lang="less" scoped>
 #Dialogue {
-  :deep(.v-md-editor-preview) {
-    width: 80%;
-  }
   :deep(.vuepress-markdown-body) {
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 0.5rem;
   }
 }

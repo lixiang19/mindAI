@@ -5,6 +5,8 @@ import router from './route'
 import { createPinia } from 'pinia'
 import Tooltip from 'primevue/tooltip'
 import TDesign from 'tdesign-vue-next'
+import ToastService from 'primevue/toastservice'
+
 // import 'tdesign-vue-next/es/style/index.css'
 
 const app = createApp(App)
@@ -16,6 +18,7 @@ app.use(PrimeVue, { ripple: true, inputStyle: 'filled' })
 app.use(TDesign)
 app.mount('#app')
 app.directive('tooltip', Tooltip)
+app.use(ToastService)
 
 // 设置font-size
 // const setHtmlFontSize = () => {

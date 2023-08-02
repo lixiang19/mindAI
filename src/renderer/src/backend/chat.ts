@@ -40,7 +40,7 @@ export async function addSystemMessage(
   const messages = JSON.parse(localStorage.getItem(`chatHistory-${id}`) || '[]')
   const functions: OpenAiFunction[] = []
   // 这里逻辑越来越重，需要修改
-
+  debugger
   const characterInfo = getCharacterById(id)
   // 1. 调用插件,先判断plugins是不是函数
   const plugins =
@@ -48,7 +48,6 @@ export async function addSystemMessage(
       ? characterInfo.plugins(messages[messages.length - 1].content, meta)
       : characterInfo.plugins
   for (const pluginName of plugins) {
-    console.log('🚀 ~ file: ChatStore.ts:39 ~ addSystemMessage ~ pluginName:', pluginName)
     const plugin = pluginMap[pluginName]
     const pluginInstance = new plugin()
     if (pluginInstance.preUserMessage) {

@@ -2,7 +2,7 @@
   <div
     :class="[
       'w-full  px-2 py-3  flex align-items-start justify-content-start hover:surface-100 cursor-pointer gap-1',
-      isActived ? 'surface-200' : ''
+      isActived ? 'surface-100' : ''
     ]"
   >
     <Avatar

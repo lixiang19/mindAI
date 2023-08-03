@@ -1,4 +1,18 @@
 import { ExecuteWebview } from './executeWebview'
+// 解析algoBorder
+function parseAlgoBorder(algoBorder: Element) {
+  const title = algoBorder.querySelector('h2')?.querySelector('a')?.textContent
+  const link = algoBorder.querySelector('h2')?.querySelector('a')?.getAttribute('href')
+  const caption = algoBorder.querySelector('.b_caption')?.querySelector('p')?.textContent
+  const algoSlug = algoBorder.querySelector('.b_algoSlug')?.querySelector('p')?.textContent
+  const info = {
+    title,
+    link,
+    caption,
+    algoSlug
+  }
+  return info
+}
 export class ExecuteBing {
   executeWebview!: ExecuteWebview
   webViewDocument!: Document
@@ -23,11 +37,14 @@ export class ExecuteBing {
     const document = parser.parseFromString(html, 'text/html')
     // 查找id为b_results下的所有class为b_algo的元素
     const result = document.querySelector('#b_results')?.querySelectorAll('.b_algo')
+    const algoBorder = document.querySelector('#b_results')?.querySelector('.b_algoBorder')
+
     const list: searchResult[] = []
     result?.forEach((item) => {
       const link = item.querySelector('a')?.getAttribute('href')
       // b_caption 下的p标签内的文字
       const caption = item.querySelector('.b_caption')?.querySelector('p')?.textContent
+      const algoSlug = item.querySelector('.b_algoSlug')?.querySelector('p')?.textContent // h2标签下的a标签
       // h2标签下的a标签
 
       // title去除里面的<strong>标签
@@ -39,7 +56,8 @@ export class ExecuteBing {
       const info = {
         link,
         caption,
-        title
+        title,
+        algoSlug
       }
       list.push(info)
     })

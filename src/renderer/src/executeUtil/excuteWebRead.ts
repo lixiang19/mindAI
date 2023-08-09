@@ -1,8 +1,20 @@
-import { ExecuteWebview } from './executeWebview'
 import { Readability } from '@mozilla/readability'
 import TurndownService from 'turndown'
+/**
+ * 去除文本中的网址
+ * @param {string} text - 需要处理的文本
+ * @returns {string} - 处理后的文本
+ */
+function removeURLs(text) {
+  // 匹配网址的正则表达式
+  const urlRegex = /(?:https?|ftp):\/\/[\n\S]+/g
+
+  // 使用replace方法将匹配到的网址替换为空字符串
+  const result = text.replace(urlRegex, '')
+
+  return result
+}
 export class ExecuteWebRead {
-  executeWebview!: ExecuteWebview
   async fetchHtml(url: string) {
     const res = await fetch(url)
     const html = await res.text()
@@ -14,11 +26,20 @@ export class ExecuteWebRead {
   async createReadWebview(url: string) {
     const document = await this.fetchHtml(url)
     const article = await this.getFoxReadModeHtml(document)
-    this.executeWebview = new ExecuteWebview()
-    if (article) {
-      await this.executeWebview.createWebview('data:text/html;charset=UTF-8,' + article.content)
+    // this.executeWebview = new ExecuteWebview()
+    // if (article) {
+    //   await this.executeWebview.createWebview('data:text/html;charset=UTF-8,' + article.content)
+    // } else {
+    //   await this.executeWebview.createWebview(url)
+    // }
+  }
+  async getReadHtml(url: string) {
+    const document = await this.fetchHtml(url)
+    const article = await this.getFoxReadModeHtml(document)
+    if (article?.content) {
+      return article?.content
     } else {
-      await this.executeWebview.createWebview(url)
+      return document.body.innerHTML
     }
   }
   async getFoxReadModeHtml(html) {
@@ -34,6 +55,7 @@ export class ExecuteWebRead {
     const document = await this.fetchHtml(url)
     const article = await this.getFoxReadModeHtml(document)
     const text = article?.content ? await this.htmlToMarkdown(article.content) : ''
-    return text
+    // 去除text中的链接
+    return removeURLs(text)
   }
 }

@@ -6,7 +6,7 @@
       <i class="pi pi-eraser mr-2 cursor-pointer" @click="handleEraser"></i>
       <div class="divider"></div>
       <div class="divider"></div>
-      <div class="ml-auto">展示思考链：</div>
+      <div class="ml-auto">显示插件结果：</div>
       <InputSwitch v-model="operationAreaStore.allowShowChain" />
     </div>
     <Textarea

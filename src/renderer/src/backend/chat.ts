@@ -40,7 +40,7 @@ export async function addSystemMessage(
   const messages = JSON.parse(localStorage.getItem(`chatHistory-${id}`) || '[]')
   const functions: OpenAiFunction[] = []
   // 这里逻辑越来越重，需要修改
-  debugger
+
   const characterInfo = getCharacterById(id)
   // 1. 调用插件,先判断plugins是不是函数
   const plugins =
@@ -64,19 +64,19 @@ export async function addSystemMessage(
 
   // 删除最后一个user的message.shadowContent
   delete messages[messages.length - 1].shadowContent
-
-  try {
-    const ret = await modelApi.completion({
-      model: 'gpt-3.5-turbo-16k-0613',
-      messages: messages,
-      stream: true,
-      onMessage: onMessage,
-      onEnd(string) {
-        last(messages).content = string
-        localStorage.setItem(`chatHistory-${id}`, JSON.stringify(messages))
-      }
-    })
-  } catch (error) {
-    console.log('发送chatgpt报错', error)
-  }
+  console.log('messages', messages)
+  // try {
+  //   const ret = await modelApi.completion({
+  //     model: 'gpt-3.5-turbo-16k-0613',
+  //     messages: messages,
+  //     stream: true,
+  //     onMessage: onMessage,
+  //     onEnd(string) {
+  //       last(messages).content = string
+  //       localStorage.setItem(`chatHistory-${id}`, JSON.stringify(messages))
+  //     }
+  //   })
+  // } catch (error) {
+  //   console.log('发送chatgpt报错', error)
+  // }
 }

@@ -1,6 +1,6 @@
 <template>
   <div id="OperationBlock" class="w-full h-full p-2 surface-200">
-    <Splitter>
+    <!-- <Splitter>
       <SplitterPane
         v-for="(item, index) in operationAreaStore.operationList"
         :id="item.id"
@@ -10,13 +10,11 @@
       >
         <MyWebview :id="item.id" :src="item.url"></MyWebview>
       </SplitterPane>
-    </Splitter>
+    </Splitter> -->
   </div>
 </template>
 
 <script setup lang="ts">
-import Splitter from '@renderer/components/Splitter.vue'
-import SplitterPane from '@renderer/components/SplitterPane.vue'
 import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 import MyWebview from '@renderer/components/MyWebview.vue'
 const operationAreaStore = useOperationAreaStore()

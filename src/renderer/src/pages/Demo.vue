@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import thoughtChain from '@renderer/Block/thoughtChain.vue'
+import thoughtChain from '@renderer/Block/ThoughtChain.vue'
 import { ref } from 'vue'
 </script>
 

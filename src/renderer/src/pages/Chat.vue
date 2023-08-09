@@ -27,7 +27,7 @@
           flexBasis: '50%'
         }"
       >
-        <OperationBlock></OperationBlock>
+        <ThoughtChain></ThoughtChain>
       </SplitterPanel>
     </Splitter>
   </div>
@@ -38,6 +38,7 @@ import CharacterList from '@renderer/Block/CharacterList.vue'
 import ChatBlock from '@renderer/Block/ChatBlock.vue'
 // import NoteBlock from '@renderer/Block/NoteBlock.vue'
 import OperationBlock from '@renderer/Block/OperationBlock.vue'
+import ThoughtChain from '@renderer/Block/ThoughtChain.vue'
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
 import { getCharacterById } from '@renderer/backend/character'

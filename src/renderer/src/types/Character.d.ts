@@ -8,7 +8,6 @@ type CharacterType = {
   helloText: string
   prompt: string
   backgroundColor?: string
-  preSystemMessage?: (messages: Messages, context: string) => Messages
   openAiConfig: {
     max_tokens?: number // 生成的最大长度
     temperature?: number // 生成的多样性
@@ -18,7 +17,7 @@ type CharacterType = {
   chatConfig: {
     number_of_memory_sticks?: number // 记忆棒的数量
   }
-  modelConfig: {
+  modelConfig?: {
     model: string
   }
 }

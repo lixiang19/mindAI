@@ -1,5 +1,5 @@
 import baseAI from '@renderer/characters/baseAI'
-import characterList from '@/renderer/src/characters/character.json'
+import characterList from '@renderer/characters/character.json'
 export const getCharacterList = () => {
   const characters = localStorage.getItem('characters')
   if (!characters) {

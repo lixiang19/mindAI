@@ -1,5 +1,5 @@
 import Read from '../pages/Read.vue'
-import Chat from '../pages/Chat.vue'
+import Chat from '../pages/Chat/Chat.vue'
 import Write from '../pages/Write.vue'
 import ReadBlock from '../Block/ReadBlock.vue'
 import WebBlock from '../Block/WebBlock.vue'

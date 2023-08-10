@@ -1,5 +1,5 @@
 import baseAI from '@renderer/characters/baseAI'
-
+import characterList from '@/renderer/src/characters/character.json'
 export const getCharacterList = () => {
   const characters = localStorage.getItem('characters')
   if (!characters) {
@@ -29,5 +29,5 @@ export const updateCharacterById = (id: number, character: CharacterType) => {
   localStorage.setItem('characters', JSON.stringify(characters))
 }
 export const getMarketCharacterList = () => {
-  return []
+  return characterList
 }

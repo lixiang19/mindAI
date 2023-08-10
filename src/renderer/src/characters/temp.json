@@ -1,0 +1,22 @@
+{
+  "name": "",
+  "label": "",
+  "tags": [
+     ""
+  ],
+  "id": 3,
+  "helloText": "",
+  "prompt": "",
+  "icon": "ri ",
+  "desc": "",
+  "chatConfig": {
+     "number_of_memory_sticks": 10
+  },
+  "openAiConfig": {
+     "max_tokens": 5000,
+     "temperature": 0
+  },
+  "modelConfig": {
+     "model": "gpt-3.5-turbo-16k-0613"
+  }
+}

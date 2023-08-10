@@ -15,6 +15,7 @@
 import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 import SearchPreview from '@renderer/components/SearchPreview.vue'
 const operationAreaStore = useOperationAreaStore()
+
 const components = {
   searchPreview: SearchPreview
 }

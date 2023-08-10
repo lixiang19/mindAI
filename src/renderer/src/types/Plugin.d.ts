@@ -26,7 +26,7 @@ interface IPluginConfig {
 }
 
 interface searchResult {
-  link: string | null | undefined
-  caption: string | null | undefined
-  title: string | null | undefined
+  link: string
+  caption: string
+  title: string
 }

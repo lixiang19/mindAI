@@ -60,12 +60,12 @@
                 <RadioGroup v-model="languageSelectedOption" :options="languageOptions" />
               </div>
             </div>
-            <div class="w-full flex justify-content-center">
-              <Button
+            <div class="w-full sub flex justify-content-center">
+              <t-button
                 class="writeBtn w-9 flex justify-content-center"
                 :disabled="isLoading"
                 @click="handleWrite"
-                >{{ buttonText }}</Button
+                >{{ buttonText }}</t-button
               >
             </div>
           </div>
@@ -319,6 +319,11 @@ const steps = [
     font-size: 1.2rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+  }
+}
+.sub {
+  :deep(button) {
+    width: 100% !important;
   }
 }
 </style>

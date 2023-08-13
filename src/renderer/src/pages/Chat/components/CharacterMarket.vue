@@ -1,19 +1,15 @@
 <template>
-  <div
-    id="CharacterMarket"
-    class="w-full flex gap-2 pt-5 flex-wrap justify-content-between align-content-start surface-50"
-  >
+  <div id="CharacterMarket" class="pt-5">
     <div
       v-for="item in characterList"
       id="characterCard"
       :key="item.id"
-      class="shadow-1 w-18rem h-7rem surface-card border-round-2xl p-3 flex flex-column justify-content-between align-items-center"
+      class="shadow-1 w-20rem h-7rem surface-card border-round-2xl p-3 flex flex-column justify-content-between align-items-center"
     >
       <div class="flex w-full justify-content-between align-items-center">
         <Avatar
-          shape="circle"
           size="large"
-          class="flex-shrink-0"
+          class="flex-shrink-0 border-round-2xl"
           v-bind="calcAvatarProp(item)"
           :style="calcAvatarStyle(item)"
         ></Avatar>
@@ -26,7 +22,7 @@
           </div>
         </div>
         <t-tooltip content="添加指令角色">
-          <t-button shape="circle" variant="outline">
+          <t-button variant="outline" class="shadow-1" @click="handleAdd(item)">
             <i class="pi pi-user-plus"></i>
           </t-button>
         </t-tooltip>
@@ -41,10 +37,10 @@
 </template>
 <script setup lang="ts">
 import { getMarketCharacterList } from '@renderer/backend/character.ts'
-import Tag from 'primevue/tag'
+import { createCharacter } from '@renderer/api/app'
 import { onMounted, ref } from 'vue'
 import Avatar from 'primevue/avatar'
-import Button from 'primevue/button'
+
 const tagMap = {
   english: '英语',
   study: '学习',
@@ -52,6 +48,9 @@ const tagMap = {
   code: '编程',
   academicWriting: '学术写作',
   plugin: '插件'
+}
+async function handleAdd(item) {
+  await createCharacter()
 }
 function calcAvatarProp(item) {
   if (item.icon) {
@@ -68,11 +67,12 @@ function calcAvatarProp(item) {
     }
   }
 }
+
 function calcAvatarStyle(item) {
   let backgroundColor = item.backgroundColor
   let color = '#fff'
   if (!backgroundColor) {
-    backgroundColor = '#3b3d91'
+    backgroundColor = '#49a0bc'
     color = '#fff'
   }
   return {
@@ -81,6 +81,7 @@ function calcAvatarStyle(item) {
   }
 }
 const characterList = ref<CharacterType[]>([])
+onMounted(async () => {})
 onMounted(async () => {
   const res = await getMarketCharacterList()
 
@@ -89,12 +90,39 @@ onMounted(async () => {
 </script>
 <style lang="less" scoped>
 #CharacterMarket {
-  height: 80vh;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  // flex-wrap: wrap;
+  // gap: 2rem;
+  // align-items: flex-start;
+  // align-content: flex-start;
+  // justify-content: space-between;
+  // 响应式的grid布局
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  grid-gap: 1rem;
+  justify-items: center;
+  align-content: flex-start;
+
+  #characterCard {
+    &:hover {
+      :deep(.t-button) {
+        opacity: 1;
+      }
+    }
+  }
   .text-label {
     font-size: 1rem;
   }
   .text-desc {
     font-size: 0.8rem;
+  }
+  :deep(.t-button) {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 1rem;
+    opacity: 0;
   }
 }
 </style>

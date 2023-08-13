@@ -1,7 +1,7 @@
 <template>
   <div id="Menu">
     <div class="menu_icon_box">
-      <img alt="dropdown icon" src="../assets/icon/power.svg" />
+      <Logo></Logo>
     </div>
     <div class="menu_box">
       <div
@@ -13,9 +13,11 @@
         <img alt="dropdown icon" :src="item.icon" />
       </div>
     </div>
-    <div class="user_box">
+    <div class="user_box cursor-pointer">
       <Divider type="solid" />
-      <Avatar label="李" class="mr-2" size="normal" shape="circle" />
+      <t-tooltip content="帮助">
+        <Avatar label="?" class="mr-2" size="normal" shape="circle"
+      /></t-tooltip>
     </div>
   </div>
 </template>
@@ -28,19 +30,19 @@ import note from '../assets/icon/note.svg'
 import chat from '../assets/icon/chat.svg'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-
+import Logo from './Logo.vue'
 const menuList = ref([
   {
     path: '/chat',
     icon: chat
   },
   {
-    path: '/demo',
-    icon: yuedu
-  },
-  {
     path: '/write',
     icon: note
+  },
+  {
+    path: '/demo',
+    icon: yuedu
   }
 ])
 const router = useRouter()
@@ -51,13 +53,13 @@ const route = useRoute()
 #Menu {
   height: 100%;
   width: 60px;
-  background: #6366f1; //
+  background: var(--td-brand-color-4); //
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   .menu_icon_box {
-    background: #5457cd;
+    background: var(--td-brand-color-2);
     width: 100%;
     height: 60px;
     display: flex;
@@ -85,12 +87,12 @@ const route = useRoute()
         height: 26px;
       }
       &:hover {
-        background: #8183f4;
+        background: var(--td-brand-color-5);
         border-radius: 5px;
       }
     }
     .isActive {
-      background: #4547a9;
+      background: var(--td-brand-color-5);
       border-radius: 5px;
     }
   }

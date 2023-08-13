@@ -30,3 +30,7 @@ type Messages = Message[]
 type Meta = {
   type: string
 }
+
+type UserInfo = {
+  $id: string
+}

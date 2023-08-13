@@ -7,7 +7,7 @@ import Tooltip from 'primevue/tooltip'
 import TDesign from 'tdesign-vue-next'
 import ToastService from 'primevue/toastservice'
 
-// import 'tdesign-vue-next/es/style/index.css'
+import './assets/tdtheme.css'
 
 const app = createApp(App)
 

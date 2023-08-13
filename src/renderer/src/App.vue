@@ -26,6 +26,5 @@ onMounted(() => {
 @import 'primeflex/primeflex.css';
 @import './assets/theme.css';
 @import 'primeicons/primeicons.css';
-@import './assets/tdtheme.css';
 @import 'remixicon/fonts/remixicon.css';
 </style>

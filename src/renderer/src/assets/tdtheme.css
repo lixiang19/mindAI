@@ -1,21 +1,21 @@
 :root,:root[theme-mode="light"] {
-    --brand-main: var(--td-brand-color-6);
+    --brand-main: var(--td-brand-color-4);
     --td-brand-color-light: var(--td-brand-color-1);
     --td-brand-color-focus: var(--td-brand-color-2);
     --td-brand-color-disabled: var(--td-brand-color-3);
-    --td-brand-color-hover: var(--td-brand-color-5);
-    --td-brand-color: var(--td-brand-color-6);
-    --td-brand-color-active: var(--td-brand-color-7);
-    --td-brand-color-1: #f4f2ff;
-    --td-brand-color-2: #e0dfff;
-    --td-brand-color-3: #c2c4ff;
-    --td-brand-color-4: #a3a5ff;
-    --td-brand-color-5: #8285ff;
-    --td-brand-color-6: #6466e9;
-    --td-brand-color-7: #4b4ccf;
-    --td-brand-color-8: #3130b6;
-    --td-brand-color-9: #170ca3;
-    --td-brand-color-10: #050079;
+    --td-brand-color-hover: var(--td-brand-color-3);
+    --td-brand-color: var(--td-brand-color-4);
+    --td-brand-color-active: var(--td-brand-color-5);
+    --td-brand-color-1: #e0f7ff;
+    --td-brand-color-2: #b2ecff;
+    --td-brand-color-3: #63d9fa;
+    --td-brand-color-4: #40bcdc;
+    --td-brand-color-5: #009fbe;
+    --td-brand-color-6: #00829d;
+    --td-brand-color-7: #00687e;
+    --td-brand-color-8: #005061;
+    --td-brand-color-9: #003946;
+    --td-brand-color-10: #00262f;
     --td-warning-color-1: #fef3e6;
     --td-warning-color-2: #f9e0c7;
     --td-warning-color-3: #f7c797;
@@ -100,6 +100,13 @@
     --td-font-gray-2: rgba(0, 0, 0, 0.6);
     --td-font-gray-3: rgba(0, 0, 0, 0.4);
     --td-font-gray-4: rgba(0, 0, 0, 0.26);
+    --td-brand-color-light-hover: var(--td-brand-color-2);
+    --td-warning-color-light-hover: var(--td-warning-color-2);
+    --td-error-color-light-hover: var(--td-error-color-2);
+    --td-success-color-light-hover: var(--td-success-color-2);
+    --td-bg-color-secondarycomponent: var(--td-gray-color-4);
+    --td-bg-color-secondarycomponent-hover: var(--td-gray-color-5);
+    --td-bg-color-secondarycomponent-active: var(--td-gray-color-6);
     --td-table-shadow-color: rgba(0, 0, 0, 8%);
     --td-scrollbar-color: rgba(0, 0, 0, 10%);
     --td-scrollbar-hover-color: rgba(0, 0, 0, 30%);
@@ -174,17 +181,17 @@
     --td-text-color-brand: var(--td-brand-color);
     --td-text-color-link: var(--td-brand-color);
   /* end 字体配置 */    /* 圆角配置 */
-    --td-radius-small: 2px;
-    --td-radius-default: 3px;
-    --td-radius-medium: 6px;
-    --td-radius-large: 9px;
-    --td-radius-extraLarge: 12px;
+    --td-radius-small: 3px;
+    --td-radius-default: 4px;
+    --td-radius-medium: 8px;
+    --td-radius-large: 12px;
+    --td-radius-extraLarge: 16px;
     --td-radius-round: 999px;
     --td-radius-circle: 50%;
   /* end 圆角配置 *//* 阴影配置 */
-    --td-shadow-1: 0 1px 10px rgba(0, 0, 0, 0.05), 0 4px 5px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    --td-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, 0.05), 0 8px 10px 1px rgba(0, 0, 0, 0.06), 0 5px 5px -3px rgba(0, 0, 0, 0.1);
-    --td-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, 0.05), 0 16px 24px 2px rgba(0, 0, 0, 0.04), 0 8px 10px -5px rgba(0, 0, 0, 0.08);
+    --td-shadow-1: 0 1px 10px rgba(0, 0, 0, .05),0 4px 5px rgba(0, 0, 0, 8%),0 2px 4px -1px rgba(0, 0, 0, 12%);
+    --td-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, .05),0 8px 10px 1px rgba(0, 0, 0, 6%),0 5px 5px -3px rgba(0, 0, 0, 10%);
+    --td-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, .05),0 16px 24px 2px rgba(0, 0, 0, 4%),0 8px 10px -5px rgba(0, 0, 0, 8%);
   /* end 阴影配置 *//* 尺寸配置 */
     --td-size-1: 2px;
     --td-size-2: 4px;
@@ -252,16 +259,16 @@
     --td-brand-color-hover: var(--td-brand-color-5);
     --td-brand-color: var(--td-brand-color-6);
     --td-brand-color-active: var(--td-brand-color-7);
-    --td-brand-color-1: #8285ff20;
-    --td-brand-color-2: #170ca3;
-    --td-brand-color-3: #3130b6;
-    --td-brand-color-4: #4b4ccf;
-    --td-brand-color-5: #6466e9;
-    --td-brand-color-6: #8285ff;
-    --td-brand-color-7: #a3a5ff;
-    --td-brand-color-8: #c2c4ff;
-    --td-brand-color-9: #e0dfff;
-    --td-brand-color-10: #f4f2ff;
+    --td-brand-color-1: #009fbe20;
+    --td-brand-color-2: #003946;
+    --td-brand-color-3: #005061;
+    --td-brand-color-4: #00687e;
+    --td-brand-color-5: #00829d;
+    --td-brand-color-6: #009fbe;
+    --td-brand-color-7: #45c0e0;
+    --td-brand-color-8: #63d9fa;
+    --td-brand-color-9: #b2ecff;
+    --td-brand-color-10: #e0f7ff;
     --td-warning-color-1: #4f2a1d;
     --td-warning-color-2: #582f21;
     --td-warning-color-3: #733c23;
@@ -388,17 +395,17 @@
     --td-shadow-inset-bottom: inset 0 -0.5px 0 #5e5e5e;
     --td-shadow-inset-left: inset -0.5px 0 0 #5e5e5e;
       /* 圆角配置 */
-    --td-radius-small: 2px;
-    --td-radius-default: 3px;
-    --td-radius-medium: 6px;
-    --td-radius-large: 9px;
-    --td-radius-extraLarge: 12px;
+    --td-radius-small: 3px;
+    --td-radius-default: 4px;
+    --td-radius-medium: 8px;
+    --td-radius-large: 12px;
+    --td-radius-extraLarge: 16px;
     --td-radius-round: 999px;
     --td-radius-circle: 50%;
   /* end 圆角配置 *//* 阴影配置 */
-    --td-shadow-1: 0 1px 10px rgba(0, 0, 0, 0.05), 0 4px 5px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
-    --td-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, 0.05), 0 8px 10px 1px rgba(0, 0, 0, 0.06), 0 5px 5px -3px rgba(0, 0, 0, 0.1);
-    --td-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, 0.05), 0 16px 24px 2px rgba(0, 0, 0, 0.04), 0 8px 10px -5px rgba(0, 0, 0, 0.08);
+    --td-shadow-1: 0 1px 10px rgba(0, 0, 0, .05),0 4px 5px rgba(0, 0, 0, 8%),0 2px 4px -1px rgba(0, 0, 0, 12%);
+    --td-shadow-2: 0 3px 14px 2px rgba(0, 0, 0, .05),0 8px 10px 1px rgba(0, 0, 0, 6%),0 5px 5px -3px rgba(0, 0, 0, 10%);
+    --td-shadow-3: 0 6px 30px 5px rgba(0, 0, 0, .05),0 16px 24px 2px rgba(0, 0, 0, 4%),0 8px 10px -5px rgba(0, 0, 0, 8%);
   /* end 阴影配置 *//* 尺寸配置 */
     --td-size-1: 2px;
     --td-size-2: 4px;

@@ -14,7 +14,6 @@
     "chatConfig": {
        "number_of_memory_sticks": 10
     },
-    "backgroundColor": "#3b3d91",
     "openAiConfig": {
        "max_tokens": 900,
        "temperature": 0

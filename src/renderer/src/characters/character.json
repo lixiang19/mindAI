@@ -17,9 +17,6 @@
     "openAiConfig": {
        "max_tokens": 900,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -40,9 +37,6 @@
     "openAiConfig": {
        "max_tokens": 1500,
        "temperature": 0.6
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -62,9 +56,6 @@
     "openAiConfig": {
        "max_tokens": 5000,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -84,9 +75,6 @@
     "openAiConfig": {
        "max_tokens": 5000,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -106,9 +94,6 @@
     "openAiConfig": {
        "max_tokens": 200,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -128,9 +113,6 @@
     "openAiConfig": {
        "max_tokens": 2000,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -150,9 +132,6 @@
     "openAiConfig": {
        "max_tokens": 5000,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   },
   {
@@ -173,9 +152,6 @@
     "openAiConfig": {
        "max_tokens": 5000,
        "temperature": 0
-    },
-    "modelConfig": {
-       "model": "gpt-3.5-turbo-16k-0613"
     }
   }
 ]

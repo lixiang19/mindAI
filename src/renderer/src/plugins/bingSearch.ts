@@ -3,11 +3,12 @@ import { ExecuteWebRead } from '@renderer/executeUtil/excuteWebRead'
 type IPluginBingSearchConfig = IPluginConfig
 export class BingSearch implements IPlugin {
   pluginName: string
-  functions?: OpenAiFunction[] | undefined
+  description: string
   constructor() {
     this.pluginName = 'bingSearch'
+    this.description = 'bing搜索,通过互联网查询结果充当上下文'
   }
-  calcMostLikelyAnswer(res: searchResult[]) {
+  _calcMostLikelyAnswer(res: searchResult[]) {
     const resWithScore = res.map((item) => {
       let score = 0
       if (!item.link) {
@@ -37,8 +38,10 @@ export class BingSearch implements IPlugin {
     let context = ''
     const executeBing = new ExecuteBing()
     const executeWebRead = new ExecuteWebRead()
+
     const res = await executeBing.fetchBingSearchResult(message.content)
-    const mostLikelyAnswer = this.calcMostLikelyAnswer(res) // 最有可能的答案，暂时取第一个，日后可能会根据权重计算
+    console.log('🚀 ~ file: bingSearch.ts:42 ~ BingSearch ~ preUserMessage ~ res:', res)
+    const mostLikelyAnswer = this._calcMostLikelyAnswer(res) // 最有可能的答案，暂时取第一个，日后可能会根据权重计算
     const link = mostLikelyAnswer.link
     context = res.reduce((pre, cur) => {
       return pre + ';' + '标题:' + cur.title + ',内容:' + cur.caption
@@ -56,8 +59,8 @@ export class BingSearch implements IPlugin {
     executeBing.createPreview(res, link)
     // 去除context的空格和换行
     context = context.replace(/\s+/g, '')
-    message.shadowContent = context
-    message.content = `参考上下文是{context:'${message.shadowContent}'}中，问题是{quesiton:'${message.content}'}`
+
+    message.content = `参考上下文是{context:'${context}'}中，问题是{question:'${message.content}'}`
 
     return message
   }

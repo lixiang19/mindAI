@@ -7,6 +7,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Demo from '../pages/Demo.vue'
 import Login from '@renderer/pages/Login/Login.vue'
 import { checkUser } from '@renderer/api/app'
+
 const routes = [
   {
     path: '/',

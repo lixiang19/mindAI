@@ -30,10 +30,12 @@ import {
 const props = defineProps<{
   character: CharacterType
 }>()
+const messages = ref<Messages>([])
 watch(
   () => props.character,
-  async (character) => {
-    const newMessages = await initCharacterMessages(character.id, character)
+  (character) => {
+    const newMessages = initCharacterMessages(character.id, character)
+    console.log('🚀 ~ file: ChatBlock.vue:38 ~ newMessages:', newMessages)
     messages.value = newMessages
   },
   {
@@ -43,7 +45,6 @@ watch(
 
 const dialogueBox = ref<HTMLElement | null>(null)
 
-const messages = ref<Messages>([])
 const messagesWithoutSystem = computed(() => {
   return messages.value.filter((message) => message.role !== 'system')
 })

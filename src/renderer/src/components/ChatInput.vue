@@ -14,13 +14,14 @@
       rows="4"
       auto-resize
       class="w-full flex-auto"
-      placeholder="输入问题，按回车键发送。?开头可以使用搜索引擎，!开头使用当前所有查询结果，#开头仅使用知识库，输入网址可以读取网页。"
+      placeholder="输入问题，按回车键发送"
       @keydown.enter="handleSubmit"
     />
   </div>
 </template>
 
 <script setup lang="ts">
+// 。?开头可以使用搜索引擎，!开头使用当前所有查询结果，#开头仅使用知识库，输入网址可以读取网页。
 import Textarea from 'primevue/textarea'
 import { ref } from 'vue'
 import modelApi from '../api/modelApi'

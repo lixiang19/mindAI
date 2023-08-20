@@ -1,11 +1,11 @@
-import baseAI from '@renderer/characters/baseAI'
+import baseAIs from '@renderer/characters/baseAI'
 import characterList from '@renderer/characters/character.json'
 export const getCharacterList = () => {
   const characters = localStorage.getItem('characters')
   if (!characters) {
-    return [baseAI]
+    return baseAIs
   }
-  return [baseAI, ...JSON.parse(characters)]
+  return [...baseAIs, ...JSON.parse(characters)]
 }
 export const getCharacterById = (id: number) => {
   const characters = getCharacterList()

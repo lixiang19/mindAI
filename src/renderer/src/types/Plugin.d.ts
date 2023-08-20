@@ -1,6 +1,6 @@
 interface IPlugin {
   pluginName: string
-  functions?: OpenAiFunction[]
+  description: string
   preUserMessage?: (message: Message) => message
   afterUserMessage?: (messages: Messages, context: string) => Messages
   preSystemMessage?: (messages: Messages, context: string) => Messages

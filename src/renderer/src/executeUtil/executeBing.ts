@@ -10,9 +10,14 @@ export class ExecuteBing {
     return id
   }
   async fetchBingSearchResult(search: string) {
+    // 如果search前有？，则去除
+    if (search.startsWith('?') || search.startsWith('？')) {
+      search = search.slice(1)
+    }
     const res = await fetch(
       'https://www.bing.com/search?q=' + encodeURIComponent(search) + '&FORM=BEHPTB&cc=sg'
     )
+
     const html = await res.text()
     // 创建一个document
     const parser = new DOMParser()

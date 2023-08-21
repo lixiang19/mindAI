@@ -1,5 +1,5 @@
 <template>
-  <div id="ChatInput" class="w-full surface-0 flex flex-column pb-3 px-2">
+  <div id="ChatInput" class="w-full surface-0 flex flex-column pb-3 px-2 relative">
     <div class="w-full h-4rem flex align-items-center">
       <i class="pi pi-ban mr-2 cursor-pointer" @click="handleStop"></i>
       <div class="divider"></div>
@@ -8,6 +8,9 @@
       <div class="divider"></div>
       <div class="ml-auto">显示插件结果：</div>
       <InputSwitch v-model="operationAreaStore.allowShowChain" />
+    </div>
+    <div class="stop_btn shadow-1">
+      <StopBtn></StopBtn>
     </div>
     <Textarea
       v-model="value"
@@ -21,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import StopBtn from './StopBtn.vue'
 // 。?开头可以使用搜索引擎，!开头使用当前所有查询结果，#开头仅使用知识库，输入网址可以读取网页。
 import Textarea from 'primevue/textarea'
 import { ref } from 'vue'
@@ -54,6 +58,16 @@ function handleEraser(): void {
     width: 1px;
     background-color: #f2f3f5;
     margin: 0 1rem;
+  }
+  .stop_btn {
+    width: 3.5rem;
+    height: 2.5rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: -1rem;
+    transform: translateX(-50%);
   }
 }
 </style>

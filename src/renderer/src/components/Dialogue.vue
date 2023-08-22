@@ -4,30 +4,38 @@
     :class="['flex mb-3', direction === 'right' && 'flex-row-reverse justify-content-end ml-auto']"
   >
     <Avatar
-      :icon="icon"
+      :character="character"
       :class="[direction === 'left' ? 'mr-2' : 'ml-2', 'flex-shrink-0']"
       size="normal"
-      style="background-color: #2196f3; color: #ffffff"
-      shape="circle"
     />
     <div class="flex flex-column">
       <div :class="['text-xs font-bold mb-1', direction === 'right' && 'ml-auto']">
-        {{ direction === 'left' ? character.name : '用户' }}
+        {{ direction === 'left' ? character.label : '用户' }}
       </div>
-      <!-- <div
-        class="surface-card p-2 hover:shadow-2 cursor-pointer border-round text-sm"
-        v-html="result"
-      ></div> -->
       <v-md-preview
         :text="content"
         class="surface-card cursor-pointer border-round text-sm"
       ></v-md-preview>
     </div>
+    <div class="action">
+      <t-tooltip content="复制">
+        <i class="ri-clipboard-line" @click="handleCopy"></i>
+      </t-tooltip>
+      <t-tooltip v-if="showRefresh" content="重新生成本段">
+        <i class="ri-refresh-line" @click="handleRefresh"></i>
+      </t-tooltip>
+      <t-tooltip content="删除">
+        <i class="ri-delete-bin-6-line" @click="handleDel"></i>
+      </t-tooltip>
+      <t-tooltip content="存入知识库">
+        <i class="ri-magic-line"></i>
+      </t-tooltip>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import Avatar from 'primevue/avatar'
+import Avatar from '@renderer/components/Avatar.vue'
 import { computed } from 'vue'
 import VMdPreview from '@kangc/v-md-editor/lib/preview'
 import '@kangc/v-md-editor/lib/style/preview.css'
@@ -46,19 +54,20 @@ const props = defineProps<{
   role: string
   // 对话内容
   content: string
+  showRefresh: boolean
 }>()
-// const result = computed(() => {
-//   return md.render(props.content)
-// })
+const emits = defineEmits(['del', 'refresh'])
+function handleCopy() {
+  navigator.clipboard.writeText(props.content)
+}
+function handleDel() {
+  emits('del')
+}
+function handleRefresh() {
+  emits('refresh')
+}
 const direction = computed(() => {
   return props.role === 'user' ? 'right' : 'left'
-})
-const icon = computed(() => {
-  if (props.role === 'user') {
-    return 'pi pi-' + 'user'
-  } else {
-    return props.character.icon
-  }
 })
 </script>
 
@@ -67,6 +76,15 @@ const icon = computed(() => {
   :deep(.vuepress-markdown-body) {
     padding: 0.5rem;
     border-radius: 0.5rem;
+  }
+  .action {
+    display: none;
+  }
+  &:hover {
+    .action {
+      display: flex;
+      gap: 0.5rem;
+    }
   }
 }
 </style>

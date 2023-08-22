@@ -43,13 +43,18 @@ import { reactive, ref, onMounted } from 'vue'
 import { MessagePlugin } from 'tdesign-vue-next'
 import Logo from '@renderer/components/Logo.vue'
 import { login, checkUser } from '@renderer/api/app'
-import { setUserInfo } from '@renderer/api/user'
+import { setUserInfo, addUserInfo } from '@renderer/api/user'
 import { MailIcon, LockOnIcon } from 'tdesign-icons-vue-next'
 import router from '@renderer/route'
+import { getUserLine } from '@renderer/api/userData'
 onMounted(async () => {
   try {
     const res = await checkUser()
     setUserInfo(res)
+    const line = await getUserLine(res.$id)
+    addUserInfo({
+      line
+    })
     console.log('已经登录')
     router.push({
       path: '/chat'

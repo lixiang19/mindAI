@@ -8,7 +8,6 @@ import ChatPlugin from './ChatPlugin'
 const chatHistory = new ChatHistory()
 export const initCharacterMessages = (id: number, character: CharacterType): Messages => {
   let messages = chatHistory.getHistory(id)
-  console.log('🚀 ~ file: chat.ts:11 ~ initCharacterMessages ~ messages:', messages)
   if (messages.length === 0) {
     messages = [
       { role: 'system', content: character.prompt },
@@ -17,6 +16,12 @@ export const initCharacterMessages = (id: number, character: CharacterType): Mes
     chatHistory.setHistory(id, messages)
   }
 
+  return messages
+}
+export const delMessage = (id: number, index: number): Messages => {
+  const messages = chatHistory.getHistory(id)
+  messages.splice(index, 1)
+  chatHistory.setHistory(id, messages)
   return messages
 }
 export function addUserMessage(id: number, text: string, context?: string): Messages {

@@ -36,4 +36,5 @@ type Meta = {
 
 type UserInfo = {
   $id: string
+  line: Line
 }

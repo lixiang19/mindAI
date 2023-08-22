@@ -1,6 +1,6 @@
 <template>
   <Avatar
-    size="large"
+    :size="size"
     shape="circle"
     v-bind="calcAvatarProp(character)"
     :style="calcAvatarStyle(character)"
@@ -9,9 +9,17 @@
 </template>
 <script setup lang="ts">
 import Avatar from 'primevue/avatar'
-const props = defineProps<{
-  character: CharacterType
-}>()
+import { PropType } from 'vue'
+const props = defineProps({
+  character: {
+    type: Object as PropType<CharacterType>,
+    required: true
+  },
+  size: {
+    type: String as PropType<'normal' | 'large'>,
+    default: 'normal'
+  }
+})
 function calcAvatarProp(item) {
   if (item.icon) {
     return {

@@ -1,16 +1,23 @@
 <template>
   <div id="ChatInput" class="w-full surface-0 flex flex-column pb-3 px-2 relative">
     <div class="w-full h-4rem flex align-items-center">
-      <i class="pi pi-ban mr-2 cursor-pointer" @click="handleStop"></i>
+      <t-tooltip content="线路设置">
+        <i class="ri-list-settings-line"></i>
+      </t-tooltip>
       <div class="divider"></div>
-      <i class="pi pi-eraser mr-2 cursor-pointer" @click="handleEraser"></i>
-      <div class="divider"></div>
+      <!-- <t-tooltip content="历史记录">
+        <i class="ri-history-fill"></i>
+      </t-tooltip>
+      <div class="divider"></div> -->
+      <t-tooltip content="新话题">
+        <i class="ri-windy-line" @click="handleEraser"></i>
+      </t-tooltip>
       <div class="divider"></div>
       <div class="ml-auto">显示插件结果：</div>
       <InputSwitch v-model="operationAreaStore.allowShowChain" />
     </div>
-    <div class="stop_btn shadow-1">
-      <StopBtn></StopBtn>
+    <div v-if="showStopBtn" class="stop_btn shadow-1">
+      <StopBtn @click="handleStop"></StopBtn>
     </div>
     <Textarea
       v-model="value"
@@ -34,7 +41,9 @@ import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 const operationAreaStore = useOperationAreaStore()
 const emit = defineEmits(['submit', 'eraser', 'typeChange'])
 const value = ref('')
-
+defineProps<{
+  showStopBtn: boolean
+}>()
 function handleSubmit(e): void {
   e.preventDefault()
   if (!e.isComposing) {

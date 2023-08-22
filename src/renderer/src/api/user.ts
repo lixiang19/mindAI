@@ -5,3 +5,6 @@ export function getUserInfo() {
 export function setUserInfo(info) {
   userInfo = info
 }
+export function addUserInfo(data) {
+  userInfo = Object.assign({}, getUserInfo(), data)
+}

@@ -13,7 +13,7 @@
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
 import CharacterItem from '@renderer/components/CharacterItem.vue'
-import { getCharacterList } from '@renderer/backend/character'
+import { getCharacterList } from '@renderer/api/character'
 const characters = reactive<CharacterType[]>([])
 onMounted(async () => {
   const list = await getCharacterList()

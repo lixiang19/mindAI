@@ -1,4 +1,4 @@
-import api from './modelApi'
+import api from './aiApi/modelApi'
 // chat completion
 export async function genWrite(content, prompt, aiConfig, onMessage, onEnd): Promise<void> {
   await api.completion({

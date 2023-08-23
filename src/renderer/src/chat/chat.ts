@@ -1,6 +1,6 @@
-import modelApi from '../api/modelApi'
-import { saveEmbeddings, searchEmbeddings } from '../api/embedding'
-import { getCharacterById } from './character'
+import modelApi from '../api/aiApi/modelApi'
+import { saveEmbeddings, searchEmbeddings } from '../api/aiApi/embedding'
+import { getCharacterById } from '@renderer/globalCache/charactersCache'
 import { last } from 'lodash-es'
 
 import ChatHistory from './ChatHistory'
@@ -48,8 +48,28 @@ export async function addSystemMessage(
   const messages = chatHistory.getHistory(id)
   const newMessages = await prePlugin(id, messages)
   console.log('🚀 ~ file: chat.ts:45 ~ newMessages:', newMessages)
-
+  await mockLlmComplete(id, messages, onMessage)
   // await llmComplete(id, newMessages, onMessage)
+}
+async function mockLlmComplete(id: number, messages: Messages, onMessage) {
+  // 使用定时器模拟，0.5s一个字，6s完成
+  return new Promise((resolve, reject) => {
+    const max = 12
+    let i = 0
+    let content = ''
+    const timer = setInterval(() => {
+      i++
+      if (i > max) {
+        clearInterval(timer)
+        last(messages).content = content
+        chatHistory.setHistory(id, messages)
+        resolve(content)
+        return
+      }
+      content = '思考中。。。' + i + '/' + max
+      onMessage(content)
+    }, 500)
+  })
 }
 async function llmComplete(id: number, messages: Messages, onMessage) {
   const characterInfo = getCharacterById(id)
@@ -58,11 +78,12 @@ async function llmComplete(id: number, messages: Messages, onMessage) {
   const number_of_memory_sticks = chatConfig?.number_of_memory_sticks || 10
   const temperature = openAiConfig?.temperature || 1
   const max_tokens = openAiConfig?.max_tokens || 1000
+  const systemMessage = messages[0]
   const memoryMessages = messages.slice(-number_of_memory_sticks)
   try {
     const ret = await modelApi.completion({
       model,
-      messages: memoryMessages,
+      messages: [systemMessage].concat(memoryMessages),
       stream: true,
       onMessage: onMessage,
       temperature,

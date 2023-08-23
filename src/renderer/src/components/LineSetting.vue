@@ -3,7 +3,7 @@
     <div
       v-for="(line, index) in freeLineList"
       :key="index"
-      :class="['line_item', line.id === selectId && 'line_item_active']"
+      :class="['line_item', line.$id === selectId && 'line_item_active']"
       @click="() => handleSet(line)"
     >
       <div class="title">免费线路{{ index + 1 }}</div>
@@ -12,7 +12,7 @@
     <div
       v-for="(line, index) in payLineList"
       :key="index"
-      :class="['line_item', line.id === selectId && 'line_item_active']"
+      :class="['line_item', line.$id === selectId && 'line_item_active']"
       @click="() => handleSet(line)"
     >
       <div class="title">付费专线{{ index + 1 }}</div>
@@ -53,7 +53,7 @@ function handleSet(line: Line | string) {
   if (typeof line === 'string') {
     selectId.value = line
   } else {
-    selectId.value = line.id
+    selectId.value = line.$id
   }
 }
 </script>

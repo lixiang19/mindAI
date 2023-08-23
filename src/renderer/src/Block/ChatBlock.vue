@@ -35,7 +35,7 @@ import {
   addSystemWaitMessage,
   addSystemMessage,
   delMessage
-} from '@renderer/backend/chat'
+} from '@renderer/chat/chat'
 const props = defineProps<{
   character: CharacterType
 }>()
@@ -100,3 +100,4 @@ async function handleSubmit(content: string) {
   }
 }
 </style>
+@renderer/chat/chat

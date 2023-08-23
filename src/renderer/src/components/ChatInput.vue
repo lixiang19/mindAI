@@ -80,3 +80,4 @@ function handleEraser(): void {
   }
 }
 </style>
+../api/aiApi/modelApi

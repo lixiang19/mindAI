@@ -36,7 +36,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { getMarketCharacterList } from '@renderer/backend/character.ts'
+import { getMarketCharacterList } from '@renderer/api/character'
 import { createCharacter } from '@renderer/api/app'
 import { onMounted, ref } from 'vue'
 import Avatar from 'primevue/avatar'

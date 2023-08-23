@@ -46,7 +46,7 @@ import ThoughtChain from '@renderer/Block/ThoughtChain.vue'
 
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
-import { getCharacterById } from '@renderer/backend/character'
+import { getCharacterById } from '@renderer/globalCache/charactersCache'
 
 import baseAIList from '@renderer/characters/baseAI'
 import { reactive, ref, watchEffect } from 'vue'

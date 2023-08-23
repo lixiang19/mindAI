@@ -46,14 +46,14 @@ import { login, checkUser } from '@renderer/api/app'
 import { setUserInfo, addUserInfo } from '@renderer/api/user'
 import { MailIcon, LockOnIcon } from 'tdesign-icons-vue-next'
 import router from '@renderer/route'
-import { getUserLine } from '@renderer/api/userData'
+import { getUserBaseData } from '@renderer/api/userData'
 onMounted(async () => {
   try {
     const res = await checkUser()
     setUserInfo(res)
-    const line = await getUserLine(res.$id)
+    const baseData = await getUserBaseData(res.$id)
     addUserInfo({
-      line
+      baseData
     })
     console.log('已经登录')
     router.push({
@@ -108,3 +108,4 @@ const handleValidateMessage = () => {
 #ComponentLogin {
 }
 </style>
+@renderer/api/aiApi/userData

@@ -3,12 +3,11 @@ import { electronAPI } from '@electron-toolkit/preload'
 import fs from 'fs'
 import path from 'path'
 
-const webviewPreload = 'file://' + path.join(__dirname, '../../resources/webviewPreload.js?asset')
-console.log(webviewPreload)
+// const webviewPreload = 'file://' + path.join(__dirname, '../../resources/webviewPreload.js?asset')
+
 const api = {
   fs,
-  path,
-  webviewPreload
+  path
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

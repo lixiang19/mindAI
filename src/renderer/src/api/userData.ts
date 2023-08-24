@@ -6,9 +6,11 @@ const client = new Client()
   .setProject('64d5e6d03ed3a756c3b2') // Your project ID
 
 export async function getUserBaseData(userId) {
+  console.log('🚀 ~ file: userData.ts:9 ~ getUserBaseData ~ userId:', userId)
   const databases = new Databases(client)
   const result = await databases.listDocuments('userData', 'baseData', [
     Query.equal('userId', userId)
   ])
+  console.log('🚀 ~ file: userData.ts:13 ~ getUserBaseData ~ result:', result)
   return result.documents[0]
 }

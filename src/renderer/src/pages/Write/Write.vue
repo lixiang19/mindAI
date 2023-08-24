@@ -105,7 +105,7 @@ import { computed, ref } from 'vue'
 import RadioGroup from '@renderer/components/RadioGroup.vue'
 import { useToast } from 'primevue/usetoast'
 import { genWrite } from '@renderer/api/wirte'
-import modelApi from '@renderer/api/modelApi'
+import modelApi from '@renderer/api/aiApi/modelApi'
 const toast = useToast()
 const contextText = ref('')
 const promptText = ref('')

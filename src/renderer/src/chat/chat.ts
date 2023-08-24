@@ -6,7 +6,7 @@ import { last } from 'lodash-es'
 import ChatHistory from './ChatHistory'
 import ChatPlugin from './ChatPlugin'
 const chatHistory = new ChatHistory()
-export const initCharacterMessages = (id: number, character: CharacterType): Messages => {
+export const initCharacterMessages = (id: string, character: CharacterType): Messages => {
   let messages = chatHistory.getHistory(id)
   if (messages.length === 0) {
     messages = [
@@ -18,20 +18,20 @@ export const initCharacterMessages = (id: number, character: CharacterType): Mes
 
   return messages
 }
-export const delMessage = (id: number, index: number): Messages => {
+export const delMessage = (id: string, index: number): Messages => {
   const messages = chatHistory.getHistory(id)
   messages.splice(index, 1)
   chatHistory.setHistory(id, messages)
   return messages
 }
-export function addUserMessage(id: number, text: string, context?: string): Messages {
+export function addUserMessage(id: string, text: string, context?: string): Messages {
   if (context) {
     chatHistory.setContext(id, context)
   }
   const messages = chatHistory.addMessage(id, { role: 'user', content: text })
   return messages
 }
-export function addSystemWaitMessage(id: number): Messages {
+export function addSystemWaitMessage(id: string): Messages {
   const messages = chatHistory.getHistory(id)
   const assistantMessage = {
     role: 'assistant',

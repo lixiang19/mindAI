@@ -1,25 +1,25 @@
 import { cloneDeep } from 'lodash-es'
 export default class ChatHistory {
-  messageIdMap: Map<number, Messages>
-  contextIdMap: Map<number, string>
+  messageIdMap: Map<string, Messages>
+  contextIdMap: Map<string, string>
   constructor() {
     this.messageIdMap = new Map()
     this.contextIdMap = new Map()
   }
-  setContext(id: number, context: string) {
+  setContext(id: string, context: string) {
     this.contextIdMap.set(id, context)
   }
-  delContext(id: number) {
+  delContext(id: string) {
     this.contextIdMap.delete(id)
   }
-  setHistory(id: number, messages: Messages) {
+  setHistory(id: string, messages: Messages) {
     this.messageIdMap.set(id, messages)
   }
-  getHistory(id: number) {
+  getHistory(id: string) {
     const messages = this.messageIdMap.get(id)
     return cloneDeep(messages) || []
   }
-  addMessage(id: number, message: Message) {
+  addMessage(id: string, message: Message) {
     const messages = this.getHistory(id)
     if (messages) {
       messages.push(message)

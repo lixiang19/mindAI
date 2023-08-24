@@ -1,7 +1,7 @@
 import baseAIs from '@renderer/characters/baseAI'
 import client from '@renderer/api/client'
 import { getUserInfo } from '@renderer/globalCache/userCache'
-import { getUserBaseData } from '@renderer/api/aiApi/userData'
+import { getUserBaseData } from '@renderer/api/userData'
 import { Client, Account, ID, Databases, Query, Permission, Role } from 'appwrite'
 import { setCharactersCache } from '@renderer/globalCache/charactersCache'
 export const getCharacterList = async () => {

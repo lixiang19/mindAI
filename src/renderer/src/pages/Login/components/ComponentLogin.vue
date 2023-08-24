@@ -43,7 +43,7 @@ import { reactive, ref, onMounted } from 'vue'
 import { MessagePlugin } from 'tdesign-vue-next'
 import Logo from '@renderer/components/Logo.vue'
 import { login, checkUser } from '@renderer/api/app'
-import { setUserInfo, addUserInfo } from '@renderer/api/user'
+import { setUserInfo } from '@renderer/globalCache/userCache'
 import { MailIcon, LockOnIcon } from 'tdesign-icons-vue-next'
 import router from '@renderer/route'
 import { getUserBaseData } from '@renderer/api/userData'
@@ -52,7 +52,7 @@ onMounted(async () => {
     const res = await checkUser()
     setUserInfo(res)
     const baseData = await getUserBaseData(res.$id)
-    addUserInfo({
+    setUserInfo({
       baseData
     })
     console.log('已经登录')

@@ -25,8 +25,8 @@
 
 <script setup lang="ts">
 import { computed, onUpdated, reactive, watch } from 'vue'
-import Dialogue from '../components/Dialogue.vue'
-import ChatInput from '../components/ChatInput.vue'
+import Dialogue from './Dialogue.vue'
+import ChatInput from './ChatInput.vue'
 import { ref } from 'vue'
 import { last } from 'lodash-es'
 import {
@@ -45,7 +45,7 @@ const showStopBtn = ref(false)
 watch(
   () => props.character,
   (character) => {
-    const newMessages = initCharacterMessages(character.id, character)
+    const newMessages = initCharacterMessages(character.$id, character)
     messages.value = newMessages
   },
   {
@@ -55,7 +55,7 @@ watch(
 
 const dialogueBox = ref<HTMLElement | null>(null)
 function handleDel(index: number) {
-  const newMessages = delMessage(props.character.id, index)
+  const newMessages = delMessage(props.character.$id, index)
   messages.value = newMessages
 }
 async function handleRefresh() {
@@ -63,7 +63,7 @@ async function handleRefresh() {
   await handleSubmit(userInput.value)
 }
 function handleEraser() {
-  const newMessages = initCharacterMessages(props.character.id, props.character)
+  const newMessages = initCharacterMessages(props.character.$id, props.character)
   messages.value = newMessages
 }
 const messagesWithoutSystem = computed(() => {
@@ -82,10 +82,10 @@ onUpdated(() => {
 async function handleSubmit(content: string) {
   userInput.value = content
   showStopBtn.value = true
-  let newMessages = addUserMessage(props.character.id, content)
-  newMessages = addSystemWaitMessage(props.character.id)
+  let newMessages = addUserMessage(props.character.$id, content)
+  newMessages = addSystemWaitMessage(props.character.$id)
   messages.value = newMessages
-  await addSystemMessage(props.character.id, (str) => {
+  await addSystemMessage(props.character.$id, (str) => {
     last(messages.value)!.content = str
   })
   showStopBtn.value = false

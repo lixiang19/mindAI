@@ -39,10 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import CharacterList from '@renderer/Block/CharacterList.vue'
-import ChatBlock from '@renderer/Block/ChatBlock.vue'
+import CharacterList from './components/CharacterList.vue'
+import ChatBlock from '@renderer/Block/ChatBlock/ChatBlock.vue'
 // import NoteBlock from '@renderer/Block/NoteBlock.vue'
-import ThoughtChain from '@renderer/Block/ThoughtChain.vue'
+import ThoughtChain from '@renderer/Block/ChatBlock/ThoughtChain.vue'
 
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
@@ -54,16 +54,17 @@ import { AddIcon, ShopIcon } from 'tdesign-icons-vue-next'
 import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 import CharacterMarket from './components/CharacterMarket.vue'
 const operationAreaStore = useOperationAreaStore()
-const activeCharacterId = ref(0)
+const activeCharacterId = ref('base_o')
 const activeCharacter = ref<CharacterType>(baseAIList[0] as CharacterType)
 
 const visible = ref(false)
 function handleAIMarket() {
   visible.value = true
 }
-function handleActiveCharacter(id: number): void {
+function handleActiveCharacter(id: string): void {
   activeCharacterId.value = id
   const info = getCharacterById(id)
+
   if (info) {
     activeCharacter.value = info
   }

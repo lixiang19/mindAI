@@ -35,7 +35,7 @@ import StopBtn from './StopBtn.vue'
 // 。?开头可以使用搜索引擎，!开头使用当前所有查询结果，#开头仅使用知识库，输入网址可以读取网页。
 import Textarea from 'primevue/textarea'
 import { ref } from 'vue'
-import modelApi from '../api/modelApi'
+import modelApi from '@renderer/api/aiApi/modelApi'
 import InputSwitch from 'primevue/inputswitch'
 import { useOperationAreaStore } from '@renderer/store/OperationAreaStore'
 const operationAreaStore = useOperationAreaStore()

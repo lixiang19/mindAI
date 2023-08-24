@@ -37,7 +37,7 @@
 </template>
 <script setup lang="ts">
 import { getMarketCharacterList } from '@renderer/api/character'
-import { createCharacter } from '@renderer/api/app'
+import { addUserSelectCharacterId } from '@renderer/api/character'
 import { onMounted, ref } from 'vue'
 import Avatar from 'primevue/avatar'
 
@@ -50,7 +50,8 @@ const tagMap = {
   plugin: '插件'
 }
 async function handleAdd(item) {
-  await createCharacter()
+  console.log('🚀 ~ file: CharacterMarket.vue:53 ~ handleAdd ~ item:', item, item.id)
+  await addUserSelectCharacterId(item.$id)
 }
 function calcAvatarProp(item) {
   if (item.icon) {

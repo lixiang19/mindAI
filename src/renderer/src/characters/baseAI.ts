@@ -2,7 +2,7 @@ export default [
   {
     code: 'baseAI',
     label: 'AI小助手',
-    id: 0,
+    $id: 'base_0',
     tags: ['ai'],
     helloText: '你好，我是ai小助手，需要帮助吗？',
     prompt: '你是一个可靠的AI小助手',
@@ -12,7 +12,7 @@ export default [
   {
     code: 'searchAI',
     label: '查询助手',
-    id: 1,
+    $id: 'base_0',
     tags: ['ai', 'plugin'],
     helloText: '我可以根据知识库、以及搜索互联网回答你的问题，也可以阅读网页内容',
     prompt:

@@ -10,13 +10,24 @@
         :class="['menu_item', route.path.includes(item.path) && 'isActive']"
         @click="router.push(item.path)"
       >
-        <img alt="dropdown icon" :src="item.icon" />
+        <t-tooltip placement="right" :content="item.help">
+          <i :class="item.icon"></i>
+        </t-tooltip>
+
+        <!-- <img alt="dropdown icon" :src="item.icon" /> -->
       </div>
     </div>
     <div class="user_box cursor-pointer">
       <Divider type="solid" />
-      <t-tooltip content="帮助">
-        <Avatar label="?" class="mr-2" size="normal" shape="circle"
+      <t-tooltip content="帮助" placement="right">
+        <Avatar label="?" size="normal" shape="circle" @click="router.push('/help')"
+      /></t-tooltip>
+      <t-tooltip content="设置" placement="right">
+        <Avatar
+          icon="ri-settings-line"
+          size="normal"
+          shape="circle"
+          @click="router.push('/setting')"
       /></t-tooltip>
     </div>
   </div>
@@ -34,15 +45,23 @@ import Logo from './Logo.vue'
 const menuList = ref([
   {
     path: '/chat',
-    icon: chat
+    icon: 'ri-message-3-line',
+    help: '对话'
   },
   {
     path: '/write',
-    icon: note
+    icon: 'ri-draft-line',
+    help: '写作'
   },
   {
-    path: '/demo',
-    icon: yuedu
+    path: '/read',
+    icon: 'ri-book-read-line',
+    help: '阅读'
+  },
+  {
+    path: '/knowledge',
+    icon: 'ri-archive-2-line',
+    help: '知识库'
   }
 ])
 const router = useRouter()
@@ -86,6 +105,10 @@ const route = useRoute()
         width: 26px;
         height: 26px;
       }
+      i {
+        font-size: 1.5rem;
+        color: white;
+      }
       &:hover {
         background: var(--td-brand-color-5);
         border-radius: 5px;
@@ -98,11 +121,12 @@ const route = useRoute()
   }
   .user_box {
     margin-top: auto;
-    padding: 0 10px;
-    height: 90px;
+    padding: 0 0.1rem;
+    height: 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
   }
 }
 </style>

@@ -1,7 +1,7 @@
 type CharacterType = {
   code: string
   label: string
-  id: number
+  $id: string
   icon?: string
   tags: string[]
   desc: string

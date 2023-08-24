@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { computed, reactive, ref, VNodeRef } from 'vue'
+import { computed, reactive, ref } from 'vue'
 let id = 0
 
 export const useOperationAreaStore = defineStore('OperationArea', () => {

@@ -1,10 +1,7 @@
-let userInfoChache: UserInfo | null = null
+let userInfoChache = {}
 export function getUserInfo() {
   return userInfoChache as UserInfo
 }
-export function setUserInfo(info) {
-  userInfoChache = info
-}
-export function addUserInfo(data) {
+export function setUserInfo(data) {
   userInfoChache = Object.assign({}, getUserInfo(), data)
 }

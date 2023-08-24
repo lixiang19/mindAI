@@ -1,5 +1,5 @@
 <template>
-  <div id="Help"></div>
+  <div id="Help">帮助文档等待完善</div>
 </template>
 
 <script setup lang="ts"></script>

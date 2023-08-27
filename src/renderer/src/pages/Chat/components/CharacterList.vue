@@ -12,7 +12,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, reactive } from 'vue'
-import CharacterItem from '@renderer/components/CharacterItem.vue'
+import CharacterItem from './CharacterItem.vue'
 import { useCharactersStore } from '@renderer/store/charactersStore'
 
 const charactersStore = useCharactersStore()

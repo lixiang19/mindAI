@@ -12,7 +12,7 @@ export default [
   {
     code: 'searchAI',
     label: '查询助手',
-    $id: 'base_0',
+    $id: 'base_1',
     tags: ['ai', 'plugin'],
     helloText: '我可以根据知识库、以及搜索互联网回答你的问题，也可以阅读网页内容',
     prompt:

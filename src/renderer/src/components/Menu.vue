@@ -20,7 +20,7 @@
     <div class="user_box cursor-pointer">
       <Divider type="solid" />
       <t-tooltip content="帮助" placement="right">
-        <Avatar label="?" size="normal" shape="circle" @click="router.push('/help')"
+        <Avatar icon="ri-question-mark" size="normal" shape="circle" @click="router.push('/help')"
       /></t-tooltip>
       <t-tooltip content="设置" placement="right">
         <Avatar

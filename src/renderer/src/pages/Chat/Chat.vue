@@ -42,7 +42,7 @@
 import CharacterList from './components/CharacterList.vue'
 import ChatBlock from '@renderer/Block/ChatBlock/ChatBlock.vue'
 // import NoteBlock from '@renderer/Block/NoteBlock.vue'
-import ThoughtChain from '@renderer/Block/ChatBlock/ThoughtChain.vue'
+import ThoughtChain from './components/ThoughtChain.vue'
 
 import Splitter from 'primevue/splitter'
 import SplitterPanel from 'primevue/splitterpanel'
@@ -57,7 +57,7 @@ const operationAreaStore = useOperationAreaStore()
 const activeCharacterId = ref('base_o')
 const activeCharacter = ref<CharacterType>(baseAIList[0] as CharacterType)
 
-const visible = ref(false)
+const visible = ref(true)
 function handleAIMarket() {
   visible.value = true
 }
@@ -82,11 +82,11 @@ function handleActiveCharacter(id: string): void {
   }
 }
 .bg-cyan {
-  background-color: #f7fafb;
+  background-color: #f2f3f5;
 }
 </style>
 <style>
 .t-drawer__content-wrapper {
-  background-color: #f7fafb !important;
+  /* background-color: #f7fafb !important; */
 }
 </style>

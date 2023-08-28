@@ -17,5 +17,5 @@ export async function getPayLines() {
 export async function getAllLines() {
   const databases = new Databases(client)
   const result = await databases.listDocuments('aiData', 'openAiKey')
-  return result
+  return result.documents
 }

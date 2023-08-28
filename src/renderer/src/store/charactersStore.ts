@@ -9,8 +9,8 @@ export const useCharactersStore = defineStore('Characters', () => {
   const characters = reactive<Array<CharacterType>>([])
   async function initCharacters() {
     const list = (await getCharacterList()) as Array<CharacterType>
-    console.log('🚀 ~ file: charactersStore.ts:12 ~ initCharacters ~ list:', list)
-    characters.push(...list)
+
+    characters.splice(0, characters.length, ...list)
   }
   async function delCharacterId(characterId: string) {
     await delUserSelectCharacterId(characterId)

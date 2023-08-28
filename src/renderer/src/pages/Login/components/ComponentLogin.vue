@@ -47,6 +47,8 @@ import { setUserInfo } from '@renderer/globalCache/userCache'
 import { MailIcon, LockOnIcon } from 'tdesign-icons-vue-next'
 import router from '@renderer/route'
 import { getUserBaseData } from '@renderer/api/userData'
+import { getAllLines } from '@renderer/api/line'
+import { setKeyConfig } from '@renderer/globalCache/keyCache'
 onMounted(async () => {
   try {
     const res = await checkUser()
@@ -55,7 +57,14 @@ onMounted(async () => {
     setUserInfo({
       baseData
     })
-    console.log('已经登录')
+    const lines = await getAllLines()
+    if (baseData.lineId !== 'custom') {
+      const line = lines.find((line) => line.$id === baseData.lineId)
+      if (line) {
+        setKeyConfig(line)
+      }
+    }
+
     router.push({
       path: '/chat'
     })

@@ -2,7 +2,7 @@
   <div id="Chat" class="w-full h-full">
     <Splitter class="w-full h-full">
       <SplitterPanel class="flex align-items-center justify-content-center" :size="50">
-        <div class="flex flex-column justify-content-start h-full bg-cyan">
+        <div class="flex flex-column justify-content-start h-full bg-white character_wrapper">
           <div class="action flex h-4rem w-full px-2 align-items-center gap-5">
             <t-tooltip content="AI市场">
               <t-button @click="handleAIMarket"><ShopIcon /></t-button>
@@ -57,7 +57,7 @@ const operationAreaStore = useOperationAreaStore()
 const activeCharacterId = ref('base_o')
 const activeCharacter = ref<CharacterType>(baseAIList[0] as CharacterType)
 
-const visible = ref(true)
+const visible = ref(false)
 function handleAIMarket() {
   visible.value = true
 }
@@ -78,8 +78,11 @@ function handleActiveCharacter(id: string): void {
 }
 .action {
   :deep(button) {
-    border-radius: 0.6rem !important;
+    border-radius: 0.7rem !important;
   }
+}
+.character_wrapper {
+  border-right: 1px solid #f2f3f5;
 }
 .bg-cyan {
   background-color: #f2f3f5;

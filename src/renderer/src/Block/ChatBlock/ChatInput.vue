@@ -2,7 +2,9 @@
   <div id="ChatInput" class="w-full surface-0 flex flex-column pb-3 px-2 relative">
     <div class="w-full h-4rem flex align-items-center">
       <t-tooltip content="线路设置">
-        <i class="ri-list-settings-line"></i>
+        <t-button shape="circle" variant="text" @click="handleEraser">
+          <i class="ri-list-settings-line"></i>
+        </t-button>
       </t-tooltip>
       <div class="divider"></div>
       <!-- <t-tooltip content="历史记录">
@@ -10,7 +12,9 @@
       </t-tooltip>
       <div class="divider"></div> -->
       <t-tooltip content="新话题">
-        <i class="ri-windy-line" @click="handleEraser"></i>
+        <t-button shape="circle" variant="text" @click="handleEraser">
+          <i class="ri-windy-line"></i
+        ></t-button>
       </t-tooltip>
       <div class="divider"></div>
       <div class="ml-auto">显示插件结果：</div>
@@ -77,6 +81,9 @@ function handleEraser(): void {
     left: 50%;
     top: -1rem;
     transform: translateX(-50%);
+  }
+  .cp {
+    cursor: pointer;
   }
 }
 </style>
